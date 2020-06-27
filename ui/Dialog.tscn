@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/ui/dialog.png" type="Texture" id=1]
+[ext_resource path="res://font/slkscr.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 2 )
+
+[node name="Dialog" type="Control"]
+margin_right = 240.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 240.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 240.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.270588, 0.156863, 0.235294, 1 )
+custom_colors/font_color_shadow = Color( 0.721569, 0.482353, 0.411765, 1 )
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut urna at orci efficitur aliquet id ac tellus. In suscipit."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

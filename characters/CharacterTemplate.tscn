@@ -1,0 +1,123 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://characters/CharacterTemplate.gd" type="Script" id=1]
+[ext_resource path="res://characters/Character.gd" type="Script" id=2]
+[ext_resource path="res://globals/GenericController.gd" type="Script" id=3]
+[ext_resource path="res://assets/characters/base-char.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Mine"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.45 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "return_to_move_state"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 0 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Mine"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+states/Idle/node = SubResource( 4 )
+states/Idle/position = Vector2( 186, 79 )
+states/Mine/node = SubResource( 5 )
+states/Mine/position = Vector2( 186, 186 )
+states/Move/node = SubResource( 6 )
+states/Move/position = Vector2( 409, 79 )
+transitions = [ "Idle", "Move", SubResource( 7 ), "Move", "Idle", SubResource( 8 ), "Idle", "Mine", SubResource( 9 ), "Mine", "Idle", SubResource( 10 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+
+[node name="CharacterTemplate" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 1 )
+character_resource = ExtResource( 2 )
+controller = ExtResource( 3 )
+
+[node name="FootColider" type="CollisionShape2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+hframes = 9
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 1 )
+anims/Mine = SubResource( 2 )
+anims/Move = SubResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 11 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 12 )
