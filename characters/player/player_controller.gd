@@ -1,6 +1,6 @@
 extends GenericController
 
-func _init(character: Character, init_state, anim_state).(character,  init_state, anim_state) :
+func _init(character: Character, parent: KinematicBody2D, init_state, anim_state).(character, parent,  init_state, anim_state) :
   pass
 
 func _ready():
@@ -9,9 +9,12 @@ func _ready():
 func control(delta, velocity : Vector2):
 	match state:
 		MOVE: 
+			
 			velocity = move_control(delta, velocity)
 		DIG :
 			velocity = dig_control(delta)
+		FALL :
+			velocity = fall_control(delta, velocity)
 	return velocity
 	
 func rotate_sprite(val) -> int:
@@ -20,7 +23,7 @@ func rotate_sprite(val) -> int:
 		rotation = Input.get_action_strength("move_left") - Input.get_action_strength("move_right")
 	return rotation
 	
-func move_control(delta, velocity : Vector2):
+func move_control(delta, velocity : Vector2) -> Vector2:
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up") 
 	
@@ -36,6 +39,10 @@ func move_control(delta, velocity : Vector2):
 		
 	return velocity 
 
-func dig_control(delta):
+func dig_control(delta) -> Vector2:
 	animation_state.travel("Mine")
 	return Vector2.ZERO
+	
+func fall_control(delta, velocity : Vector2) -> Vector2:
+	velocity.y += 9.8
+	return velocity

@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 enum {
-	MOVE, DIG
+	MOVE, DIG, JUMP, FALL
 }
 
 export (Resource) var character_resource
@@ -18,7 +18,7 @@ onready var sprite = $Sprite
 onready var foot_colider = $FootColider
 
 onready var character = character_resource.new()
-onready var controller = controller_resource.new(character, MOVE, animation_state)
+onready var controller = controller_resource.new(character, KinematicBody2D.new(), MOVE, animation_state)
 onready var tile_manager = TileManager.new()
 
 
@@ -41,7 +41,7 @@ func _ready():
 		if not is_instance_valid(character.get_foot_collider_shape()):
 			var foot_shape = RectangleShape2D.new()
 			var f_height = sprite.get_rect().size.y / 3
-			var f_pos_y = (sprite.get_rect().size.y/2) - f_height
+			var f_pos_y = (sprite.get_rect().size.y / 2) - f_height
 			foot_shape.extents = Vector2(7,f_height)
 			foot_colider.shape = foot_shape
 			foot_colider.position.y += f_pos_y
@@ -51,7 +51,8 @@ func _physics_process(delta):
 	velocity = controller.control(delta, velocity)
 	rotate_sprite()
 	
-	velocity = move_and_slide(velocity)
+	
+	velocity = move_and_slide(velocity, Vector2.UP)
 	
 func return_to_move_state() -> void :
 	controller.return_to_move_state()
@@ -71,49 +72,32 @@ func start_mining () -> void :
 		var tile_position = tile_manager.tile_map.world_to_map($Sprite/MinigArea.global_position)
 		
 		tile_manager.mine_tile(tile_position, mine_direction)
-		#tile_manager.mine_tile(tile_position, mine_direction)
-#
-#
-#
-#		# block de mina
-#		tile_manager.tile_map.set_cell(tile_pos.x, tile_pos.y, 18)
-#		tile_manager.tile_map.set_cell(tile_pos.x, (tile_pos.y -1), 18)
-#
-#		# block teto
-#		tile_manager.tile_map.set_cell(tile_pos.x, (tile_pos.y -2), 6)
-#
-#		# block chao
-#		tile_manager.tile_map.set_cell(tile_pos.x, (tile_pos.y +1), 1)
-#
-#
-#		# block da frente vazio
-#		if tile_manager.tile_map.get_cell((tile_pos.x - 2), tile_pos.y) == 18 || tile_manager.tile_map.get_cell((tile_pos.x - 2), tile_pos.y) == 17 :
-#			pass
-#		else :
-#			# block lateral
-#			tile_manager.tile_map.set_cell((tile_pos.x - 1), (tile_pos.y), 4)
-#			tile_manager.tile_map.set_cell((tile_pos.x - 1), (tile_pos.var tile_pos = tile_manager.tile_map.world_to_map($Sprite/MinigArea.global_position)
-#
-#
-#
-#		# block de mina
-#		tile_manager.tile_map.set_cell(tile_pos.x, tile_pos.y, 18)
-#		tile_manager.tile_map.set_cell(tile_pos.x, (tile_pos.y -1), 18)
-#
-#		# block teto
-#		tile_manager.tile_map.set_cell(tile_pos.x, (tile_pos.y -2), 6)
-#
-#		# block chao
-#		tile_manager.tile_map.set_cell(tile_pos.x, (tile_pos.y +1), 1)
-#
-#
-#		# block da frente vazio
-#		if tile_manager.tile_map.get_cell((tile_pos.x - 2), tile_pos.y) == 18 || tile_manager.tile_map.get_cell((tile_pos.x - 2), tile_pos.y) == 17 :
-#			pass
-#		else :
-#			# block lateral
-#			tile_manager.tile_map.set_cell((tile_pos.x - 1), (tile_pos.y), 4)
-#			tile_manager.tile_map.set_cell((tile_pos.x - 1), (tile_pos.y -1), 4)
 	
 func rotate_sprite() -> void:
 	sprite.scale.x = controller.rotate_sprite(sprite.scale.x)
+	
+func _play_sound(effect : String) -> void:
+	var sound = null
+	$AudioStreamPlayer2D.volume_db = 0
+	if effect == "mine" :
+		var rnd_snd = RandomNumberGenerator.new()
+		rnd_snd.randomize()
+		var chance = rnd_snd.randf_range(0, 1) 
+		sound = "res://sounds/effects/pickaxe_snd_01.wav"
+		
+		if chance >= 0.25 and chance < 0.5 :
+			sound = "res://sounds/effects/pickaxe_snd_02.wav"
+		
+		if chance >= 0.5 and chance < 75 :
+			sound = "res://sounds/effects/pickaxe_snd_03.wav"
+		
+		if chance >= 0.75 and chance <= 1 :
+			sound = "res://sounds/effects/pickaxe_snd_04.wav"
+	
+	if effect == "step":
+		$AudioStreamPlayer2D.volume_db = -20
+		sound = "res://sounds/effects/footstep_01.wav"
+	
+	if sound :
+		$AudioStreamPlayer2D.stream = load(sound)
+		$AudioStreamPlayer2D.playing = true

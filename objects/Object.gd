@@ -6,7 +6,6 @@ onready var tecla = OS.get_scancode_string(map_key[0].scancode)
 
 
 func _ready():
-	
 	# Se nao possui ação, remove node desnecessário
 	if !possui_acao : 
 		$AreaEffect.queue_free()

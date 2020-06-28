@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/Object.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/lights/light_template.gd" type="Script" id=2]
+[ext_resource path="res://assets/effects/light.png" type="Texture" id=3]
+
+[node name="LightTemplate" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="." index="0"]
+texture = ExtResource( 3 )
+range_height = -500.0
+shadow_enabled = true
+
+[node name="Sprite" parent="." index="1"]
+vframes = 4
+hframes = 9
+frame = 18
+region_enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]

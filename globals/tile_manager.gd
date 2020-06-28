@@ -1,7 +1,7 @@
 extends Node2D
 class_name TileManager
 
-var hitable_tiles : Array = [1, 3, 4, 6, 12, 19]
+var hitable_tiles : Array = [1, 3, 4, 6, 12, 13, 19]
 var tile_map : TileMap setget set_tile_map,get_tile_map
 var tile_hited : Array
 var current_tile = null
@@ -44,8 +44,25 @@ func mine_tile(tile_position : Vector2, direction : int) -> void:
 	
 
 func _chage_to_dig_tile(tile_position: Vector2, direction):
-	tile_map.set_cell(tile_position.x, tile_position.y, 18)
-	tile_map.set_cell(tile_position.x, tile_position.y -1, 18)
+	
+	# Tudo isso para gerar 30% de chance de ter um tile com pedrinha
+	# TODO: melhorar e retirar daqui
+	var rand_f = RandomNumberGenerator.new()
+	rand_f.randomize()
+	var tile_f = 18
+	var chance_f = rand_f.randf_range(0,1)
+	if chance_f > 0.7: 
+		tile_f = 17
+	
+	var rand_s = RandomNumberGenerator.new()
+	rand_s.randomize()
+	var chance_s = rand_s.randf_range(0,1)
+	var tile_s = 18
+	if chance_s > 0.7: 
+		tile_s = 17
+	
+	tile_map.set_cell(tile_position.x, tile_position.y, tile_f)
+	tile_map.set_cell(tile_position.x, tile_position.y -1, tile_s)
 	tile_hited.erase(current_tile)
 	current_tile = null
 	
@@ -75,7 +92,3 @@ func _chage_wall_tile(tile_position: Vector2, direction):
 	_chage_to_dig_tile(tile_position, direction)
 	_chage_floor_tile(tile_position, direction)
 	_chage_ceiling_tile(tile_position, direction)
-# __      ____
-# 00|-  -|0000
-# 00|-  -|0000
-# --      ----

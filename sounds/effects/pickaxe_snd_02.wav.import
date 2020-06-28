@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pickaxe_snd_02.wav-1d2e843c8422e8f527f24ee5df5dc828.sample"
+
+[deps]
+
+source_file="res://sounds/effects/pickaxe_snd_02.wav"
+dest_files=[ "res://.import/pickaxe_snd_02.wav-1d2e843c8422e8f527f24ee5df5dc828.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
