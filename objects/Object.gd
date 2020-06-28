@@ -1,17 +1,15 @@
 extends Node2D
 
+export (bool) var possui_acao = false
+onready var map_key = InputMap.get_action_list("action")
+onready var tecla = OS.get_scancode_string(map_key[0].scancode)
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	var teste = InputMap.get_action_list("action")
-	print(teste[0].scancode)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	
+	# Se nao possui ação, remove node desnecessário
+	if !possui_acao : 
+		$AreaEffect.queue_free()
+	
+	if possui_acao : 
+		pass

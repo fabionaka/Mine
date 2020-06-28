@@ -1,9 +1,15 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://characters/CharacterTemplate.gd" type="Script" id=1]
-[ext_resource path="res://characters/Character.gd" type="Script" id=2]
-[ext_resource path="res://globals/GenericController.gd" type="Script" id=3]
+[ext_resource path="res://characters/character_template.gd" type="Script" id=1]
+[ext_resource path="res://characters/character.gd" type="Script" id=2]
+[ext_resource path="res://globals/generic_controller.gd" type="Script" id=3]
 [ext_resource path="res://assets/characters/base-char.png" type="Texture" id=4]
+
+
+
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 4, 4 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -46,9 +52,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.45 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.2, 0.45 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "start_mining"
+}, {
 "args": [  ],
 "method": "return_to_move_state"
 } ]
@@ -103,7 +112,7 @@ start_node = "Idle"
 collision_layer = 2
 script = ExtResource( 1 )
 character_resource = ExtResource( 2 )
-controller = ExtResource( 3 )
+controller_resource = ExtResource( 3 )
 
 [node name="FootColider" type="CollisionShape2D" parent="."]
 
@@ -111,6 +120,13 @@ controller = ExtResource( 3 )
 texture = ExtResource( 4 )
 hframes = 9
 frame = 6
+
+[node name="MinigArea" type="Area2D" parent="Sprite"]
+position = Vector2( -12, 8 )
+
+[node name="Collision" type="CollisionShape2D" parent="Sprite/MinigArea"]
+position = Vector2( 9.53674e-07, 0 )
+shape = SubResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )

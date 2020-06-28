@@ -4,10 +4,13 @@ class_name GenericController
 enum {
 	MOVE, DIG
 }
+
 var local_character : Character setget set_character, get_character
 var input_vector : Vector2 = Vector2.ZERO
 var state setget set_state,get_state
 var animation_state
+
+var mining
 
 func _init(character : Character, init_state, anim_state):
 	local_character = character
@@ -32,5 +35,5 @@ func control(_delta, velocity : Vector2) -> Vector2:
 func return_to_move_state() -> void:
 	state = MOVE
 	
-func rotate_sprite() -> int:
+func rotate_sprite(val) -> int:
 	return 1

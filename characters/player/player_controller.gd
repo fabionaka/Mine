@@ -14,6 +14,12 @@ func control(delta, velocity : Vector2):
 			velocity = dig_control(delta)
 	return velocity
 	
+func rotate_sprite(val) -> int:
+	var rotation = val
+	if Input.get_action_strength("move_left") - Input.get_action_strength("move_right") != 0 :
+		rotation = Input.get_action_strength("move_left") - Input.get_action_strength("move_right")
+	return rotation
+	
 func move_control(delta, velocity : Vector2):
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up") 
@@ -33,9 +39,3 @@ func move_control(delta, velocity : Vector2):
 func dig_control(delta):
 	animation_state.travel("Mine")
 	return Vector2.ZERO
-
-func rotate_sprite() -> int:
-	var rotation = 1
-	if Input.get_action_strength("move_left") - Input.get_action_strength("move_right") != 0 :
-		rotation = Input.get_action_strength("move_left") - Input.get_action_strength("move_right")
-	return rotation

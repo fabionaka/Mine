@@ -12,16 +12,22 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Character",
 "language": "GDScript",
-"path": "res://characters/Character.gd"
+"path": "res://characters/character.gd"
 }, {
 "base": "Node",
 "class": "GenericController",
 "language": "GDScript",
-"path": "res://globals/GenericController.gd"
+"path": "res://globals/generic_controller.gd"
+}, {
+"base": "Node2D",
+"class": "TileManager",
+"language": "GDScript",
+"path": "res://globals/tile_manager.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
-"GenericController": ""
+"GenericController": "",
+"TileManager": ""
 }
 
 [application]
