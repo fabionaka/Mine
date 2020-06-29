@@ -1,0 +1,150 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/objects/plants.png" type="Texture" id=1]
+[ext_resource path="res://objects/Tree.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Wind-1"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/Trunk/leaves/Leaves2/top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 30, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/Trunk/leaves/Leaves2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 28, 3.8147e-06 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Skeleton2D/Trunk/leaves:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 12, 9.53674e-07 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Skeleton2D/Trunk:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 16, 74 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Skeleton2D/Trunk/leaves/Leaves2/top:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0, -1.0, -1.2 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Skeleton2D/Trunk/leaves/Leaves2:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.5, 2.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Skeleton2D/Trunk/leaves:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -0.2, 0.5 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Skeleton2D/Trunk:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+
+[node name="Tree" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.999996, -8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 16, 16, 16 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( -25, -86 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 29, 80, 29, 72, 44, 72, 44, 66, 43, 60, 37, 40, 33, 27, 30, 12, 27, 0, 24, 0, 21, 12, 17, 27, 15, 39, 10, 60, 9, 66, 7, 72, 22, 72, 22, 80 )
+uv = PoolVector2Array( 29, 80, 29, 72, 44, 72, 44, 66, 43, 60, 37, 40, 33, 27, 30, 12, 27, 0, 24, 0, 21, 12, 17, 27, 15, 39, 10, 60, 9, 66, 7, 72, 22, 72, 22, 80 )
+polygons = [ PoolIntArray( 14, 15, 16, 17, 0, 1, 2, 3 ), PoolIntArray( 14, 13, 12, 5, 4, 3 ), PoolIntArray( 12, 11, 10, 7, 6, 5 ), PoolIntArray( 10, 9, 8, 7 ) ]
+bones = [ NodePath("Trunk"), PoolRealArray( 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 ), NodePath("Trunk/leaves"), PoolRealArray( 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 ), NodePath("Trunk/leaves/Leaves2"), PoolRealArray( 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 ), NodePath("Trunk/leaves/Leaves2/top"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+position = Vector2( -15, -80 )
+
+[node name="Trunk" type="Bone2D" parent="Skeleton2D"]
+position = Vector2( 16, 74 )
+rotation = -1.5708
+rest = Transform2D( -4.37114e-08, -1, 1, -4.37114e-08, 16, 74 )
+
+[node name="leaves" type="Bone2D" parent="Skeleton2D/Trunk"]
+position = Vector2( 12, 9.53674e-07 )
+rotation = 0.0174533
+rest = Transform2D( 1, 0, 0, 1, 12, 0 )
+default_length = 25.0
+
+[node name="Leaves2" type="Bone2D" parent="Skeleton2D/Trunk/leaves"]
+position = Vector2( 28, 3.8147e-06 )
+rotation = 0.0232711
+rest = Transform2D( 1, 0, 0, 1, 28, 3.8147e-06 )
+
+[node name="top" type="Bone2D" parent="Skeleton2D/Trunk/leaves/Leaves2"]
+position = Vector2( 30, 0 )
+rotation = -0.0167552
+rest = Transform2D( 1, 0, 0, 1, 30, 0 )
+default_length = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Wind-1 = SubResource( 1 )

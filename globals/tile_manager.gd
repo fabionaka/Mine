@@ -80,12 +80,13 @@ func _chage_wall_tile(tile_position: Vector2, direction):
 	var tl = 4
 	if direction > 0 :
 		tl = 3
+		
 	
 	if wall_tiles.has(tile_map.get_cell(tile_position.x + (direction * 2), tile_position.y)) :
 		tile_map.set_cell(tile_position.x + direction , tile_position.y, tl)
 		tile_map.set_cell(tile_position.x + direction , tile_position.y -1, tl)
 		
-	if [17,18].has(tile_map.get_cell(tile_position.x + (direction * 2), tile_position.y)) and tile_map.get_cell(tile_position.x, tile_position.y) != 19   :
+	if [17,18].has(tile_map.get_cell(tile_position.x + (direction * 2), tile_position.y)) and ![19,13].has(tile_map.get_cell(tile_position.x, tile_position.y))  :
 		tile_map.set_cell(tile_position.x + direction , tile_position.y, 19)
 		tile_map.set_cell(tile_position.x + direction , tile_position.y-1, 19)
 	

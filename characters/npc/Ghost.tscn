@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://characters/npc/npc.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/npc/ghost.gd" type="Script" id=2]
+[ext_resource path="res://assets/characters/ghost-01.png" type="Texture" id=3]
+[ext_resource path="res://characters/npc/Idle-ghost.tres" type="Animation" id=4]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[node name="Ghost" instance=ExtResource( 1 )]
+collision_layer = 2
+character_resource = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+hframes = 8
+
+[node name="AnimationPlayer" parent="." index="2"]
+anims/Idle = ExtResource( 4 )
+
+[node name="AnimationTree" parent="." index="3"]
+parameters/playback = SubResource( 1 )

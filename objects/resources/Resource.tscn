@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/resources/Resource.gd" type="Script" id=1]
+
+[node name="Resource" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 2147483655
+script = ExtResource( 1 )
+config_material = "water"
+default_sprite = "res://assets/resouce/r-00-null.png"
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
