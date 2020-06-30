@@ -1,15 +1,16 @@
 extends GenericController
 
+var prev_v = null
+
 func _init(character: Character, parent: KinematicBody2D, init_state, anim_state).(character, parent,  init_state, anim_state) :
   pass
 
 func _ready():
 	pass
 
-func control(delta, velocity : Vector2,ray : RayCast2D):
+func control(delta, velocity : Vector2,ray : RayCast2D): 
 	match state:
 		MOVE: 
-			
 			velocity = move_control(delta, velocity)
 		DIG :
 			velocity = dig_control(delta)
@@ -31,7 +32,7 @@ func rotate_sprite(val) -> int:
 	
 func move_control(delta, velocity : Vector2) -> Vector2:
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up") 
+	#input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up") 
 	
 	if input_vector != Vector2.ZERO :
 		animation_state.travel("Move")
@@ -58,6 +59,7 @@ func jump_control(_delta, velocity : Vector2, ray) -> Vector2:
 	animation_state.travel("JumpStart")
 	var vel = velocity
 	
+	
 	if !jump_height.enabled : 
 		jump_height.force_raycast_update()
 		
@@ -70,11 +72,14 @@ func jump_control(_delta, velocity : Vector2, ray) -> Vector2:
 		velocity.y += 12
 		jumping = false
 		
-	if  vel == Vector2.ZERO : 
+	
+	if  vel == Vector2.ZERO  or prev_v == velocity.y: 
 		jump_height.enabled = false
 		jumping = false
 		velocity.y += 20
 		
+	prev_v = velocity.y
+	
 	if velocity.y > 0 :
 		animation_state.travel("Jump")
 		
@@ -82,5 +87,6 @@ func jump_control(_delta, velocity : Vector2, ray) -> Vector2:
 		animation_state.travel("JumpEnd")
 		state=MOVE
 		jumping = true
+		prev_v = null
 		
 	return velocity 
