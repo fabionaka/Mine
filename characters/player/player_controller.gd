@@ -74,6 +74,7 @@ func jump_control(_delta, velocity : Vector2, ray) -> Vector2:
 		
 	
 	if  vel == Vector2.ZERO  or prev_v == velocity.y: 
+		local_parent._play_sound("headBump")
 		jump_height.enabled = false
 		jumping = false
 		velocity.y += 20

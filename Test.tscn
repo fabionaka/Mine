@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/tilemap/ground_tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -19,6 +19,9 @@
 [ext_resource path="res://assets/background/bg-4.png" type="Texture" id=17]
 [ext_resource path="res://characters/npc/Dog.tscn" type="PackedScene" id=18]
 [ext_resource path="res://objects/Tree.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Level.gd" type="Script" id=20]
+[ext_resource path="res://sounds/bg/woods-sound-bg.ogg" type="AudioStream" id=21]
+[ext_resource path="res://objects/Portal.tscn" type="PackedScene" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "assets.png 0"
@@ -167,6 +170,7 @@ position = Vector2( 4, 2 )
 script = ExtResource( 3 )
 
 [node name="Level" type="Node2D" parent="."]
+script = ExtResource( 20 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Level"]
 
@@ -358,33 +362,6 @@ config_material = "rock"
 position = Vector2( 248, -40 )
 config_material = "water"
 
-[node name="Wood11" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 120, 88 )
-
-[node name="Wood12" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 120, 88 )
-
-[node name="Wood13" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 120, 88 )
-
-[node name="Wood14" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 120, 88 )
-
-[node name="Wood15" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 120, 88 )
-
-[node name="Rock5" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 120, 88 )
-config_material = "rock"
-
-[node name="Rock6" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 120, 88 )
-config_material = "rock"
-
-[node name="Water3" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 120, 88 )
-config_material = "water"
-
 [node name="Actors" type="Node2D" parent="Level"]
 
 [node name="Dog" parent="Level/Actors" instance=ExtResource( 18 )]
@@ -416,8 +393,16 @@ position = Vector2( 440, 48 )
 [node name="Object" parent="Level/Layer2" instance=ExtResource( 8 )]
 position = Vector2( 328, 40 )
 
+[node name="Portal" parent="Level/Layer2" instance=ExtResource( 22 )]
+position = Vector2( 168.101, 32.0421 )
+
 [node name="TileMap2" type="TileMap" parent="Level"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 196626, 1, 0, 196627, 1, 0, 196628, 1, 0, 196629, 1, 0, 196630, 1, 0, 196631, 1, 0, 196632, 1, 0, 196633, 1, 0, 196634, 1, 0, 196635, 1, 0, 196636, 1, 0, 196637, 1, 0, 196638, 1, 0 )
+
+[node name="BackgroundSndEfx" type="AudioStreamPlayer2D" parent="Level"]
+position = Vector2( 92, 14 )
+stream = ExtResource( 21 )
+autoplay = true

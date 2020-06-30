@@ -18,6 +18,7 @@ onready var animation_state = animation_tree.get("parameters/playback")
 onready var sprite = $Sprite
 onready var foot_colider = $FootColider
 onready var ray_foot = $FootRaycast
+onready var snd_player = $AudioStreamPlayer2D
 
 onready var character = character_resource.new()
 onready var controller = controller_resource.new(character, self, MOVE, animation_state)
@@ -88,10 +89,10 @@ func rotate_sprite() -> void:
 	
 func _play_sound(effect : String) -> void:
 	var sound = null
+	var rnd_snd = RandomNumberGenerator.new()
+	rnd_snd.randomize()
 	$AudioStreamPlayer2D.volume_db = 0
 	if effect == "mine" :
-		var rnd_snd = RandomNumberGenerator.new()
-		rnd_snd.randomize()
 		var chance = rnd_snd.randf_range(0, 1) 
 		sound = "res://sounds/effects/pickaxe_snd_01.wav"
 		
@@ -107,6 +108,13 @@ func _play_sound(effect : String) -> void:
 	if effect == "step":
 		$AudioStreamPlayer2D.volume_db = -20
 		sound = "res://sounds/effects/footstep_01.wav"
+		
+	if effect == "headBump":
+		$AudioStreamPlayer2D.volume_db = -10
+		var chance = rnd_snd.randf_range(0, 1) 
+		sound = "res://sounds/effects/head-bump-01.wav"
+		if chance > 0.50 and chance <= 1 :
+			sound = "res://sounds/effects/head-bump-02.wav"
 	
 	if sound :
 		$AudioStreamPlayer2D.stream = load(sound)
