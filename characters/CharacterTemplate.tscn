@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://characters/character_template.gd" type="Script" id=1]
 [ext_resource path="res://characters/character.gd" type="Script" id=2]
@@ -24,7 +24,71 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=23]
+resource_name = "Jump"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 11 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "JumpEnd"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 9, 0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "return_to_move_state"
+} ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "JumpStart"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 9, 10 ]
+}
+
+[sub_resource type="Animation" id=25]
 length = 0.5
 loop = true
 step = 0.05
@@ -61,7 +125,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=26]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -94,34 +158,59 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "Jump"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "JumpEnd"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "JumpStart"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Mine"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Move"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=8]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=9]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=10]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
 
-[sub_resource type="AnimationNodeStateMachine" id=12]
-states/Idle/node = SubResource( 5 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachine" id=14]
+states/Idle/node = SubResource( 7 )
 states/Idle/position = Vector2( 186, 79 )
-states/Mine/node = SubResource( 6 )
+states/Jump/node = SubResource( 30 )
+states/Jump/position = Vector2( 622, 226 )
+states/JumpEnd/node = SubResource( 20 )
+states/JumpEnd/position = Vector2( 380, 306 )
+states/JumpStart/node = SubResource( 16 )
+states/JumpStart/position = Vector2( 530, 124 )
+states/Mine/node = SubResource( 8 )
 states/Mine/position = Vector2( 186, 186 )
-states/Move/node = SubResource( 7 )
+states/Move/node = SubResource( 9 )
 states/Move/position = Vector2( 409, 79 )
-transitions = [ "Idle", "Move", SubResource( 8 ), "Move", "Idle", SubResource( 9 ), "Idle", "Mine", SubResource( 10 ), "Mine", "Idle", SubResource( 11 ) ]
+transitions = [ "Idle", "Move", SubResource( 10 ), "Move", "Idle", SubResource( 11 ), "Idle", "Mine", SubResource( 12 ), "Mine", "Idle", SubResource( 13 ), "Idle", "JumpStart", SubResource( 17 ), "JumpStart", "Idle", SubResource( 18 ), "JumpEnd", "Idle", SubResource( 29 ), "JumpStart", "Jump", SubResource( 31 ), "Jump", "JumpEnd", SubResource( 32 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
 [node name="CharacterTemplate" type="KinematicBody2D"]
 collision_layer = 2
@@ -133,7 +222,8 @@ controller_resource = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
-hframes = 9
+hframes = 12
+frame = 10
 
 [node name="MinigArea" type="Area2D" parent="Sprite"]
 position = Vector2( -12, 8 )
@@ -144,12 +234,24 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )
-anims/Mine = SubResource( 3 )
-anims/Move = SubResource( 4 )
+anims/Jump = SubResource( 23 )
+anims/JumpEnd = SubResource( 19 )
+anims/JumpStart = SubResource( 24 )
+anims/Mine = SubResource( 25 )
+anims/Move = SubResource( 26 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 12 )
+tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 13 )
+parameters/playback = SubResource( 15 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="FootRaycast" type="RayCast2D" parent="."]
+position = Vector2( 0, 8 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+
+[node name="RayCast2D" type="RayCast2D" parent="FootRaycast"]
+position = Vector2( 0, 8 )
+cast_to = Vector2( 0, 25 )

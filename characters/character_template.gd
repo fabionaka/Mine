@@ -7,6 +7,7 @@ enum {
 export (Resource) var character_resource
 export (Resource) var controller_resource
 export (Resource) var minig_resource
+export (bool) var look_at_player = false
 
 var velocity = Vector2.ZERO
 var state = MOVE
@@ -16,9 +17,10 @@ onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 onready var sprite = $Sprite
 onready var foot_colider = $FootColider
+onready var ray_foot = $FootRaycast
 
 onready var character = character_resource.new()
-onready var controller = controller_resource.new(character, KinematicBody2D.new(), MOVE, animation_state)
+onready var controller = controller_resource.new(character, self, MOVE, animation_state)
 onready var tile_manager = TileManager.new()
 
 
@@ -29,7 +31,10 @@ func _ready():
 		
 		# load Sprite texture
 		sprite.texture = load(character.get_character_sprite())
-
+		if character.sprite_frames.vframes != 0 :
+			sprite.vframes = character.sprite_frames.vframes
+		if character.sprite_frames.hframes != 0 :
+			sprite.hframes = character.sprite_frames.hframes
 		# Setup camera (If exists)
 		if character.get_active_camera() : 
 			var scene_camera = Camera2D.new()
@@ -45,10 +50,15 @@ func _ready():
 			foot_shape.extents = Vector2(7,f_height)
 			foot_colider.shape = foot_shape
 			foot_colider.position.y += f_pos_y
+			
+		# Setup Group
+		if character.group_name:
+			add_to_group(character.group_name)
 
 
 func _physics_process(delta):
-	velocity = controller.control(delta, velocity)
+	
+	velocity = controller.control(delta, velocity, ray_foot)
 	rotate_sprite()
 	
 	

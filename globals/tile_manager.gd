@@ -43,7 +43,7 @@ func mine_tile(tile_position : Vector2, direction : int) -> void:
 	
 	
 
-func _chage_to_dig_tile(tile_position: Vector2, direction):
+func _chage_to_dig_tile(tile_position: Vector2, _direction):
 	
 	# Tudo isso para gerar 30% de chance de ter um tile com pedrinha
 	# TODO: melhorar e retirar daqui
@@ -66,15 +66,15 @@ func _chage_to_dig_tile(tile_position: Vector2, direction):
 	tile_hited.erase(current_tile)
 	current_tile = null
 	
-func _chage_floor_tile(tile_position: Vector2, direction):
+func _chage_floor_tile(tile_position: Vector2, _direction):
 	tile_map.set_cell(tile_position.x, tile_position.y + 1, 1)
 	
-func _chage_ceiling_tile(tile_position: Vector2, direction):
+func _chage_ceiling_tile(tile_position: Vector2, _direction):
 	tile_map.set_cell(tile_position.x, tile_position.y - 2, 6)
 	
 func _chage_wall_tile(tile_position: Vector2, direction):
 	# Direção está invertida
-	direction = direction * -1
+	direction = direction * -1 
 	var wall_tiles = [3, 4, 12]
 	
 	var tl = 4

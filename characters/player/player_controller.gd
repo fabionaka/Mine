@@ -6,7 +6,7 @@ func _init(character: Character, parent: KinematicBody2D, init_state, anim_state
 func _ready():
 	pass
 
-func control(delta, velocity : Vector2):
+func control(delta, velocity : Vector2,ray : RayCast2D):
 	match state:
 		MOVE: 
 			
@@ -15,6 +15,12 @@ func control(delta, velocity : Vector2):
 			velocity = dig_control(delta)
 		FALL :
 			velocity = fall_control(delta, velocity)
+		JUMP :
+			velocity = jump_control(delta, velocity, ray)
+			
+	if ray.is_colliding() and Input.is_action_just_pressed("move_up") :
+		state = JUMP
+		
 	return velocity
 	
 func rotate_sprite(val) -> int:
@@ -39,10 +45,42 @@ func move_control(delta, velocity : Vector2) -> Vector2:
 		
 	return velocity 
 
-func dig_control(delta) -> Vector2:
+func dig_control(_delta) -> Vector2:
 	animation_state.travel("Mine")
 	return Vector2.ZERO
 	
-func fall_control(delta, velocity : Vector2) -> Vector2:
+func fall_control(_delta, velocity : Vector2) -> Vector2:
 	velocity.y += 9.8
-	return velocity
+	return velocity 
+
+func jump_control(_delta, velocity : Vector2, ray) -> Vector2:
+	var jump_height = ray.get_children()[0]
+	animation_state.travel("JumpStart")
+	var vel = velocity
+	
+	if !jump_height.enabled : 
+		jump_height.force_raycast_update()
+		
+	
+	if jump_height.is_colliding() and jumping : 
+		velocity.y += -15
+		jumping = true
+	else  : 
+		jump_height.enabled = false
+		velocity.y += 12
+		jumping = false
+		
+	if  vel == Vector2.ZERO : 
+		jump_height.enabled = false
+		jumping = false
+		velocity.y += 20
+		
+	if velocity.y > 0 :
+		animation_state.travel("Jump")
+		
+	if !jumping and ray.is_colliding():
+		animation_state.travel("JumpEnd")
+		state=MOVE
+		jumping = true
+		
+	return velocity 

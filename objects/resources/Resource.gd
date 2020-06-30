@@ -13,6 +13,7 @@ func _ready():
 		setup_object(config_material)
 	else :
 		queue_free()
+	
 
 
 func setup_object(name : String) :
@@ -26,7 +27,32 @@ func setup_object(name : String) :
 		$Sprite.texture = load(default_sprite)
 		
 	# Setup Shapes 
-	
-	var shape = CircleShape2D.new()
-	shape.radius = $Sprite.get_rect().size.x /2
+	var shape = CapsuleShape2D.new()
+	shape.radius = $Sprite.get_rect().size.x /2.5
+	shape.height = $Sprite.get_rect().size.x / 2
 	$CollisionShape2D.shape = shape
+	$CollisionShape2D.rotation_degrees = 90
+	
+	resource_lifetime(game_material)
+
+
+func resource_lifetime(game_material):
+	var lf_tm = 30
+	if game_material.has("lifetime") :
+		lf_tm = game_material.lifetime
+	var t = Timer.new()
+	t.set_wait_time(lf_tm)
+	t.set_one_shot(true)
+	add_child(t)
+	t.start()
+	yield(t, "timeout")
+	linear_velocity.y += -50
+	t.queue_free()
+	play_puff()
+	
+
+func play_puff() -> void:
+	$AnimationPlayer.play("Puff")
+
+func destroy() -> void:
+	queue_free()

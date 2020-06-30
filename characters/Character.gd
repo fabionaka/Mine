@@ -4,6 +4,8 @@ var sprite_texture = "res://assets/characters/base-char.png" setget set_characte
 var active_camera : bool setget set_active_camera, get_active_camera
 var camera_zoom : Vector2 = Vector2(1,1)
 var foot_collider_shape setget set_foot_collider_shape, get_foot_collider_shape
+var sprite_frames = {"vframes" : 0, "hframes":0}
+var group_name : String
 
 # fisica
 var max_speed : int = 100
@@ -12,7 +14,7 @@ var friction : int = 500
 var health : int = 0
 
 func _init():
-	active_camera = true
+	active_camera = false
 
 
 func set_character_sprite(value):

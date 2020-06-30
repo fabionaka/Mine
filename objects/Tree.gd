@@ -5,9 +5,9 @@ extends Node2D
 func _ready():
 	var rnd = RandomNumberGenerator.new()
 	rnd.randomize()
-	var tm = rnd.randf_range(0,0.5)
+	var tm = rnd.randf_range(0,0.8)
 	
-	var position_y = rnd.randf_range(0,10)
+	var position_y = rnd.randf_range(0,15)
 	position.y += position_y
 			
 			
