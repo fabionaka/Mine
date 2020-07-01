@@ -26,8 +26,12 @@ tree_root = SubResource( 1 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 2 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="FxPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="BgSndPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Interaction" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+
+[node name="FootRayCast" type="RayCast2D" parent="."]

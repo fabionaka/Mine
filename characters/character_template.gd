@@ -1,13 +1,20 @@
 extends KinematicBody2D
 
 enum {
-	MOVE, DIG, JUMP, FALL
+	MOVE, DIG, JUMP, FALL,
+}
+enum Space {
+	WOODS, MINE,
+}
+enum Bus {
+	MASTER, CAVE, CAVEFX,
 }
 
 export (Resource) var character_resource
 export (Resource) var controller_resource
 export (Resource) var minig_resource
 export (bool) var look_at_player = false
+export (bool) var has_bg_sound = false
 
 var velocity = Vector2.ZERO
 var state = MOVE
@@ -17,8 +24,9 @@ onready var animation_tree = $AnimationTree
 onready var animation_state = animation_tree.get("parameters/playback")
 onready var sprite = $Sprite
 onready var foot_colider = $FootColider
-onready var ray_foot = $FootRaycast
-onready var snd_player = $AudioStreamPlayer2D
+onready var ray_foot = $FootRayCast
+onready var snd_player = $FxPlayer
+onready var bg_snd_player = $BgSndPlayer
 
 onready var character = character_resource.new()
 onready var controller = controller_resource.new(character, self, MOVE, animation_state)
@@ -55,6 +63,11 @@ func _ready():
 		# Setup Group
 		if character.group_name:
 			add_to_group(character.group_name)
+		
+		# Setup BG sound
+		
+		if has_bg_sound and is_instance_valid(bg_snd_player) :
+			setup_bgx(Bus.MASTER, "res://sounds/bg/woods-sound-bg.ogg")
 
 
 func _physics_process(delta):
@@ -91,7 +104,7 @@ func _play_sound(effect : String) -> void:
 	var sound = null
 	var rnd_snd = RandomNumberGenerator.new()
 	rnd_snd.randomize()
-	$AudioStreamPlayer2D.volume_db = 0
+	snd_player.volume_db = 0
 	if effect == "mine" :
 		var chance = rnd_snd.randf_range(0, 1) 
 		sound = "res://sounds/effects/pickaxe_snd_01.wav"
@@ -106,16 +119,54 @@ func _play_sound(effect : String) -> void:
 			sound = "res://sounds/effects/pickaxe_snd_04.wav"
 	
 	if effect == "step":
-		$AudioStreamPlayer2D.volume_db = -20
+		snd_player.volume_db = -20
 		sound = "res://sounds/effects/footstep_01.wav"
 		
 	if effect == "headBump":
-		$AudioStreamPlayer2D.volume_db = -10
+		snd_player.volume_db = -10
 		var chance = rnd_snd.randf_range(0, 1) 
 		sound = "res://sounds/effects/head-bump-01.wav"
 		if chance > 0.50 and chance <= 1 :
 			sound = "res://sounds/effects/head-bump-02.wav"
 	
 	if sound :
-		$AudioStreamPlayer2D.stream = load(sound)
-		$AudioStreamPlayer2D.playing = true
+		snd_player.stream = load(sound)
+		snd_player.playing = true
+
+
+func setup_bgx(set_bus, snd):
+	
+	var tween = Tween.new()
+	add_child(tween)
+	match set_bus :
+		Bus.MASTER :
+			bg_snd_player.bus =  "Master"
+			snd_player.bus = "Master"
+		Bus.CAVE :
+			bg_snd_player.bus =  "Cave"
+			snd_player.bus = "CaveMinus"
+			
+	if bg_snd_player.playing :
+		tween.interpolate_property(bg_snd_player, "volume_db",
+		0, -80, 1,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.start()
+		yield(tween, "tween_completed")
+		bg_snd_player.stream = load(snd)
+		bg_snd_player.playing = false
+	
+	
+	
+	
+	
+	if !bg_snd_player.playing :
+		bg_snd_player.stream = load(snd)
+		bg_snd_player.playing = true
+		tween.interpolate_property(bg_snd_player, "volume_db",
+		-80, 0, 1,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.start()
+		yield(tween, "tween_completed")
+	
+	bg_snd_player.autoplay = true
+	tween.queue_free()
