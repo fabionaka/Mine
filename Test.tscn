@@ -308,7 +308,7 @@ frame = 9
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Level/Layer1"]
 position = Vector2( 554, 36 )
 frames = SubResource( 10 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Tree5" parent="Level/Layer1" instance=ExtResource( 19 )]
@@ -337,6 +337,7 @@ position = Vector2( -120, 10 )
 
 [node name="LightTemplate" parent="Level/Layer1" instance=ExtResource( 10 )]
 position = Vector2( 144, 24 )
+possui_acao = true
 
 [node name="plants11" type="Sprite" parent="Level/Layer1"]
 position = Vector2( 390, 40 )

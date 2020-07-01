@@ -1,8 +1,15 @@
 extends "res://objects/Object.gd"
 
+signal turned_on
+signal turned_off
+signal fuel_added
 
-onready var local_energy : float = $Light2D.energy
-onready var local_texture_scale : float = $Light2D.texture_scale
+export (int) var fuel = 0 setget add_fuel
+
+onready var light = $Light2D
+onready var local_energy : float = light.energy
+onready var local_texture_scale : float = light.texture_scale
+
 func _ready():
 	$AnimationPlayer.play("Light")
 
@@ -11,5 +18,17 @@ func _flickering():
 	var rnd_size = RandomNumberGenerator.new()
 	rnd_size.randomize()
 	var light_size = rnd_size.randf_range(0.9, 1.1)
-	$Light2D.texture_scale = local_texture_scale * light_size
-	$Light2D.energy = local_energy * light_size / 1.2
+	light.texture_scale = local_texture_scale * light_size
+	light.energy = local_energy * light_size / 1.2
+
+
+func _turn_on() -> void:
+	light.enabled = true
+	
+func _turn_off() -> void:
+	light.enabled = false
+	
+
+func add_fuel(value) :
+	fuel += value
+	emit_signal("fuel_added", value)

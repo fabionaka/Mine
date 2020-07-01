@@ -1,20 +1,47 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/objects/assets.png" type="Texture" id=1]
 [ext_resource path="res://objects/Object.gd" type="Script" id=2]
+[ext_resource path="res://font/slkscr.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+outline_size = 1
+outline_color = Color( 0.121569, 0.0313726, 0.0313726, 1 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="CircleShape2D" id=1]
 
 [node name="Object" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 80, 16, 16, 16 )
+[node name="Informacao" type="Control" parent="."]
+visible = false
+anchor_bottom = 0.677
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Informacao"]
+margin_right = 17.0
+margin_bottom = 9.0
+custom_fonts/font = SubResource( 2 )
+text = "TAB"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AreaEffect" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaEffect"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 80, 16, 16, 16 )
+[connection signal="body_entered" from="AreaEffect" to="." method="_on_AreaEffect_body_entered"]
+[connection signal="body_exited" from="AreaEffect" to="." method="_on_AreaEffect_body_exited"]

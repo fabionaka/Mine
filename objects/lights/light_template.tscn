@@ -12,10 +12,13 @@ texture = ExtResource( 3 )
 range_height = -500.0
 shadow_enabled = true
 
-[node name="Sprite" parent="." index="1"]
+[node name="Informacao" parent="." index="1"]
+anchor_right = 0.636
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+
+[node name="Sprite" parent="." index="4"]
 vframes = 4
 hframes = 9
 frame = 18
 region_enabled = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
