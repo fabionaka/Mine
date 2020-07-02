@@ -155,10 +155,6 @@ func setup_bgx(set_bus, snd):
 		bg_snd_player.stream = load(snd)
 		bg_snd_player.playing = false
 	
-	
-	
-	
-	
 	if !bg_snd_player.playing :
 		bg_snd_player.stream = load(snd)
 		bg_snd_player.playing = true
@@ -170,3 +166,14 @@ func setup_bgx(set_bus, snd):
 	
 	bg_snd_player.autoplay = true
 	tween.queue_free()
+
+func do_action():
+	var action_area = $Sprite/ActionArea
+	var ignore_list = ['Sprite']
+	
+	for a in action_area.get_overlapping_areas() :
+		var body_area = a.get_parent()
+		
+		if a.get_parent().get_groups().has("actions"):
+			body_area.do_action()
+	

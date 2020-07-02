@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/tilemap/ground_tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://assets/objects/plants.png" type="Texture" id=9]
 [ext_resource path="res://objects/lights/candle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/lights/lamp.tscn" type="PackedScene" id=11]
-[ext_resource path="res://objects/resources/Resource.tscn" type="PackedScene" id=12]
 [ext_resource path="res://characters/npc/Ghost.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/background/bg-1.png" type="Texture" id=14]
 [ext_resource path="res://assets/background/bg-3.png" type="Texture" id=15]
@@ -22,7 +21,8 @@
 [ext_resource path="res://Level.gd" type="Script" id=20]
 [ext_resource path="res://assets/objects/set.png" type="Texture" id=21]
 [ext_resource path="res://objects/Portal.tscn" type="PackedScene" id=22]
-[ext_resource path="res://assets/objects/fogueira.png" type="Texture" id=23]
+[ext_resource path="res://globals/tile_manager.gd" type="Script" id=24]
+[ext_resource path="res://objects/lights/Firepit.tscn" type="PackedScene" id=25]
 
 [sub_resource type="TileSet" id=1]
 0/name = "assets.png 0"
@@ -166,46 +166,6 @@
 9/shapes = [  ]
 9/z_index = 0
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 23 )
-region = Rect2( 0, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 23 )
-region = Rect2( 24, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 23 )
-region = Rect2( 48, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 23 )
-region = Rect2( 72, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 23 )
-region = Rect2( 96, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 23 )
-region = Rect2( 120, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 23 )
-region = Rect2( 144, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 23 )
-region = Rect2( 168, 0, 24, 24 )
-
-[sub_resource type="SpriteFrames" id=10]
-animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "default",
-"speed": 10.0
-} ]
-
 [node name="Game" type="Node2D"]
 position = Vector2( 4, 2 )
 script = ExtResource( 3 )
@@ -287,56 +247,27 @@ tile_data = PoolIntArray( -131080, 4, 0, -65544, 4, 0, -8, 4, 0, 65528, 4, 0, 13
 position = Vector2( 228, 24 )
 texture = ExtResource( 21 )
 
-[node name="fogueira" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 196, 36 )
-texture = ExtResource( 23 )
-hframes = 10
-frame = 8
-
-[node name="fogueira2" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 532, 36 )
-texture = ExtResource( 23 )
-hframes = 10
-frame = 8
-
-[node name="fogueira3" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 576, 36 )
-texture = ExtResource( 23 )
-hframes = 10
-frame = 9
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Level/Layer1"]
-position = Vector2( 554, 36 )
-frames = SubResource( 10 )
-frame = 2
-playing = true
-
-[node name="Tree5" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 389, 44 )
-
 [node name="Tree3" parent="Level/Layer1" instance=ExtResource( 19 )]
 position = Vector2( 410, 48 )
 
-[node name="Tree4" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 380, 48 )
-
-[node name="Tree6" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 340, 48 )
-
-[node name="Tree7" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 320, 48 )
-
 [node name="Lamp" parent="Level/Layer1" instance=ExtResource( 11 )]
 position = Vector2( 56, 24 )
+possui_acao = true
 
 [node name="Lamp2" parent="Level/Layer1" instance=ExtResource( 11 )]
 position = Vector2( -8, 24 )
+possui_acao = true
 
 [node name="Lamp3" parent="Level/Layer1" instance=ExtResource( 11 )]
 position = Vector2( -120, 10 )
+possui_acao = true
 
 [node name="LightTemplate" parent="Level/Layer1" instance=ExtResource( 10 )]
-position = Vector2( 144, 24 )
+position = Vector2( 144, 40 )
+possui_acao = true
+
+[node name="LightTemplate2" parent="Level/Layer1" instance=ExtResource( 10 )]
+position = Vector2( 512, 40 )
 possui_acao = true
 
 [node name="plants11" type="Sprite" parent="Level/Layer1"]
@@ -378,59 +309,12 @@ region_rect = Rect2( 48, 48, 16, 32 )
 [node name="Placa" parent="Level/Layer1" instance=ExtResource( 7 )]
 position = Vector2( 288, 40 )
 
-[node name="Wood" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 236, 9 )
+[node name="Lamp4" parent="Level/Layer1" instance=ExtResource( 11 )]
+position = Vector2( 556, 40 )
+possui_acao = true
 
-[node name="Wood2" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 240, 8 )
-
-[node name="Wood3" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 232, 9 )
-
-[node name="Wood4" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 232, 5 )
-
-[node name="Wood5" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 240, 12 )
-
-[node name="Rock" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 236, 9 )
-config_material = "rock"
-
-[node name="Rock2" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 236, 9 )
-config_material = "rock"
-
-[node name="Water" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 236, 9 )
-config_material = "water"
-
-[node name="Wood6" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 248, -40 )
-
-[node name="Wood7" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 248, -40 )
-
-[node name="Wood8" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 248, -40 )
-
-[node name="Wood9" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 248, -40 )
-
-[node name="Wood10" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 248, -40 )
-
-[node name="Rock3" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 248, -40 )
-config_material = "rock"
-
-[node name="Rock4" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 248, -40 )
-config_material = "rock"
-
-[node name="Water2" parent="Level/Layer1" instance=ExtResource( 12 )]
-position = Vector2( 248, -40 )
-config_material = "water"
+[node name="Placa2" parent="Level/Layer1" instance=ExtResource( 7 )]
+position = Vector2( 638, 40 )
 
 [node name="Actors" type="Node2D" parent="Level"]
 
@@ -448,24 +332,22 @@ collision_mask = 1
 position = Vector2( 492, 32 )
 character_resource = ExtResource( 5 )
 controller_resource = ExtResource( 4 )
+minig_resource = ExtResource( 24 )
 has_bg_sound = true
 
 [node name="Layer2" type="Node2D" parent="Level"]
-
-[node name="Tree2" parent="Level/Layer2" instance=ExtResource( 19 )]
-position = Vector2( 364, 48 )
-
-[node name="Tree" parent="Level/Layer2" instance=ExtResource( 19 )]
-position = Vector2( 401, 48 )
-
-[node name="Tree3" parent="Level/Layer2" instance=ExtResource( 19 )]
-position = Vector2( 440, 48 )
 
 [node name="Object" parent="Level/Layer2" instance=ExtResource( 8 )]
 position = Vector2( 328, 40 )
 
 [node name="Portal" parent="Level/Layer2" instance=ExtResource( 22 )]
 position = Vector2( 168.101, 32.0421 )
+
+[node name="Firepit" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 195, 36 )
+
+[node name="Firepit2" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 597, 36 )
 
 [node name="TileMap2" type="TileMap" parent="Level"]
 tile_set = ExtResource( 1 )

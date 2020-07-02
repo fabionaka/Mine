@@ -1,5 +1,7 @@
 extends GenericController
 
+
+
 var prev_v = null
 
 func _init(character: Character, parent: KinematicBody2D, init_state, anim_state).(character, parent,  init_state, anim_state) :
@@ -43,6 +45,8 @@ func move_control(delta, velocity : Vector2) -> Vector2:
 		
 	if Input.is_action_just_pressed("dig"):
 		state = DIG
+	if Input.is_action_just_pressed("action"):
+		local_parent.do_action()
 		
 	return velocity 
 

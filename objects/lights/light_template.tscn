@@ -7,18 +7,18 @@
 [node name="LightTemplate" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Light2D" type="Light2D" parent="." index="0"]
+[node name="Informacao" parent="." index="0"]
+anchor_right = 0.636
+
+[node name="Light2D" type="Light2D" parent="." index="2"]
 texture = ExtResource( 3 )
 range_height = -500.0
 shadow_enabled = true
 
-[node name="Informacao" parent="." index="1"]
-anchor_right = 0.636
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
-
-[node name="Sprite" parent="." index="4"]
+[node name="Sprite" parent="." index="3"]
 vframes = 4
 hframes = 9
 frame = 18
 region_enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]

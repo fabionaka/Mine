@@ -36,3 +36,22 @@ func _play_new_bg(from, to):
 			player.setup_bgx(Bus.MASTER, "res://sounds/bg/woods-sound-bg.ogg")
 		Space.MINE :
 			player.setup_bgx(Bus.CAVE, "res://sounds/bg/cave-drip-bg.ogg")
+
+
+func give_resources(pos : Vector2, ammount : int, type) -> void :
+	
+	print(pos, " | ", ammount, " | ", type)
+	var resource = load("res://objects/resources/Resource.tscn")
+	var layer = get_node("Layer2")
+	var i = 0
+	
+	while i < ammount :
+		var rnd = RandomNumberGenerator.new()
+		rnd.randomize()
+		var linear_velocity = Vector2(rnd.randf_range(-10,10), -80)
+		var instantiated = resource.instance()
+		instantiated.config_material = type
+		instantiated.global_position = pos
+		instantiated.linear_velocity = linear_velocity
+		layer.add_child(instantiated)
+		i += 1

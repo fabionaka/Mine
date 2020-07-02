@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://characters/character_template.gd" type="Script" id=1]
 [ext_resource path="res://characters/character.gd" type="Script" id=2]
@@ -7,6 +7,10 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
+
+[sub_resource type="CapsuleShape2D" id=25]
+radius = 8.0
+height = 16.0
 
 [sub_resource type="Animation" id=2]
 length = 0.4
@@ -231,6 +235,11 @@ position = Vector2( -12, 8 )
 [node name="Collision" type="CollisionShape2D" parent="Sprite/MinigArea"]
 position = Vector2( 9.53674e-07, 0 )
 shape = SubResource( 1 )
+
+[node name="ActionArea" type="Area2D" parent="Sprite"]
+
+[node name="Collision" type="CollisionShape2D" parent="Sprite/ActionArea"]
+shape = SubResource( 25 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )

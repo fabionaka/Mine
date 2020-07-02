@@ -1,5 +1,4 @@
 shader_type canvas_item;
-
 uniform float width : hint_range(0,5);
 uniform vec4 outline_color : hint_color;
 uniform sampler2D textureName;
@@ -19,4 +18,5 @@ void fragment() {
 	
 	vec4 final_color = mix(sprite_color, outline_color, clamp(alpha,0.0,1.0));
 	COLOR = vec4(final_color.rgb, clamp(abs(alpha) + sprite_color.a, 0.0, 1.0));
+	
 }

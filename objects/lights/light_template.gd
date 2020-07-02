@@ -11,7 +11,7 @@ onready var local_energy : float = light.energy
 onready var local_texture_scale : float = light.texture_scale
 
 func _ready():
-	$AnimationPlayer.play("Light")
+	_turn_on()
 
 
 func _flickering():
@@ -24,11 +24,19 @@ func _flickering():
 
 func _turn_on() -> void:
 	light.enabled = true
+	$AnimationPlayer.play("Light")
 	
 func _turn_off() -> void:
 	light.enabled = false
+	$AnimationPlayer.play("Off")
 	
 
 func add_fuel(value) :
 	fuel += value
 	emit_signal("fuel_added", value)
+
+func do_action() :
+	if light.enabled :
+		_turn_off()
+	elif !light.enabled :
+		_turn_on()
