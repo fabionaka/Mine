@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/lights/light_template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/lights/lamp.tres" type="Animation" id=2]
+[ext_resource path="res://assets/objects/lamp.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Off"
@@ -16,7 +17,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 34 ]
+"values": [ 7 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Light2D:enabled")
@@ -38,7 +39,10 @@ enabled = false
 texture_scale = 1.2
 
 [node name="Sprite" parent="." index="3"]
-frame = 34
+texture = ExtResource( 3 )
+vframes = 1
+hframes = 8
+frame = 0
 
 [node name="AnimationPlayer" parent="." index="4"]
 anims/Light = ExtResource( 2 )

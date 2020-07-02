@@ -255,19 +255,19 @@ position = Vector2( 56, 24 )
 possui_acao = true
 
 [node name="Lamp2" parent="Level/Layer1" instance=ExtResource( 11 )]
-position = Vector2( -8, 24 )
+position = Vector2( -8, 23 )
 possui_acao = true
 
 [node name="Lamp3" parent="Level/Layer1" instance=ExtResource( 11 )]
-position = Vector2( -120, 10 )
+position = Vector2( -120, 12 )
 possui_acao = true
 
 [node name="LightTemplate" parent="Level/Layer1" instance=ExtResource( 10 )]
-position = Vector2( 144, 40 )
+position = Vector2( 150, 43 )
 possui_acao = true
 
 [node name="LightTemplate2" parent="Level/Layer1" instance=ExtResource( 10 )]
-position = Vector2( 512, 40 )
+position = Vector2( 513, 43 )
 possui_acao = true
 
 [node name="plants11" type="Sprite" parent="Level/Layer1"]
@@ -310,7 +310,7 @@ region_rect = Rect2( 48, 48, 16, 32 )
 position = Vector2( 288, 40 )
 
 [node name="Lamp4" parent="Level/Layer1" instance=ExtResource( 11 )]
-position = Vector2( 556, 40 )
+position = Vector2( 556, 42 )
 possui_acao = true
 
 [node name="Placa2" parent="Level/Layer1" instance=ExtResource( 7 )]
@@ -323,13 +323,13 @@ position = Vector2( 177, 36 )
 interation_radius = 15
 
 [node name="Ghost" parent="Level/Actors" instance=ExtResource( 13 )]
-position = Vector2( -84, 32 )
+position = Vector2( -84, 33 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
 collision_mask = 1
 
 [node name="Player" parent="Level/Actors" instance=ExtResource( 2 )]
-position = Vector2( 492, 32 )
+position = Vector2( 492, 33 )
 character_resource = ExtResource( 5 )
 controller_resource = ExtResource( 4 )
 minig_resource = ExtResource( 24 )
@@ -344,10 +344,10 @@ position = Vector2( 328, 40 )
 position = Vector2( 168.101, 32.0421 )
 
 [node name="Firepit" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 195, 36 )
+position = Vector2( 195, 38 )
 
 [node name="Firepit2" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 597, 36 )
+position = Vector2( 597, 38 )
 
 [node name="TileMap2" type="TileMap" parent="Level"]
 tile_set = ExtResource( 1 )
