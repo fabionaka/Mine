@@ -37,7 +37,7 @@ func setup_object(name : String) :
 
 
 func resource_lifetime(game_material):
-	var lf_tm = 30
+	var lf_tm = 20
 	if game_material.has("lifetime") :
 		lf_tm = game_material.lifetime
 	var t = Timer.new()

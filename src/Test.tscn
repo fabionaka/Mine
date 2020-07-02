@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/tilemap/ground_tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/objects/plants.png" type="Texture" id=9]
 [ext_resource path="res://objects/lights/candle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/lights/lamp.tscn" type="PackedScene" id=11]
+[ext_resource path="res://objects/resources/ResourceSpawner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://characters/npc/Ghost.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/background/bg-1.png" type="Texture" id=14]
 [ext_resource path="res://assets/background/bg-3.png" type="Texture" id=15]
@@ -266,12 +267,8 @@ possui_acao = true
 position = Vector2( 150, 43 )
 possui_acao = true
 
-[node name="LightTemplate2" parent="Level/Layer1" instance=ExtResource( 10 )]
-position = Vector2( 513, 43 )
-possui_acao = true
-
 [node name="plants11" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 390, 40 )
+position = Vector2( 392, 40 )
 texture = ExtResource( 9 )
 region_enabled = true
 region_rect = Rect2( 48, 16, 16, 16 )
@@ -283,7 +280,7 @@ region_enabled = true
 region_rect = Rect2( 48, 0, 16, 16 )
 
 [node name="plants3" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 456, 40 )
+position = Vector2( 451, 40 )
 texture = ExtResource( 9 )
 region_enabled = true
 region_rect = Rect2( 48, 0, 16, 16 )
@@ -295,7 +292,7 @@ region_enabled = true
 region_rect = Rect2( 48, 16, 16, 16 )
 
 [node name="plants5" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 504, 40 )
+position = Vector2( 473, 40 )
 texture = ExtResource( 9 )
 region_enabled = true
 region_rect = Rect2( 48, 32, 16, 16 )
@@ -308,13 +305,6 @@ region_rect = Rect2( 48, 48, 16, 32 )
 
 [node name="Placa" parent="Level/Layer1" instance=ExtResource( 7 )]
 position = Vector2( 288, 40 )
-
-[node name="Lamp4" parent="Level/Layer1" instance=ExtResource( 11 )]
-position = Vector2( 556, 42 )
-possui_acao = true
-
-[node name="Placa2" parent="Level/Layer1" instance=ExtResource( 7 )]
-position = Vector2( 638, 40 )
 
 [node name="Actors" type="Node2D" parent="Level"]
 
@@ -346,11 +336,11 @@ position = Vector2( 168.101, 32.0421 )
 [node name="Firepit" parent="Level/Layer2" instance=ExtResource( 25 )]
 position = Vector2( 195, 38 )
 
-[node name="Firepit2" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 597, 38 )
-
 [node name="TileMap2" type="TileMap" parent="Level"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 196626, 1, 0, 196627, 1, 0, 196628, 1, 0, 196629, 1, 0, 196630, 1, 0, 196631, 1, 0, 196632, 1, 0, 196633, 1, 0, 196634, 1, 0, 196635, 1, 0, 196636, 1, 0, 196637, 1, 0, 196638, 1, 0 )
+
+[node name="ResourceSpawner" parent="." instance=ExtResource( 12 )]
+position = Vector2( 368, 41 )

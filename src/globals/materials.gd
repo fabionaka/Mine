@@ -1,8 +1,9 @@
 class_name GameMaterials
 
 var materials = [
-	{"name": "wood", "icon": "res://assets/resouce/r-01-wood.png", "lifetime": 35,},
-	{"name": "rock", "icon": "res://assets/resouce/r-02-rock.png", "lifetime": 15,},
+	{"name": "wood", "icon": "res://assets/resouce/r-01-wood.png", "lifetime": 12,},
+	{"name": "rock", "icon": "res://assets/resouce/r-02-rock.png", "lifetime": 5,},
+	{"name": "gold", "icon": "res://assets/resouce/r-03-gold.png", "lifetime": 7,},
 	{"name": "water", },
 ]
 var materials_name : Array;
