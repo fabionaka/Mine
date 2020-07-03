@@ -8,11 +8,11 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
 
-[sub_resource type="CapsuleShape2D" id=25]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 8.0
 height = 16.0
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -28,8 +28,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Jump"
+[sub_resource type="Animation" id=4]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -45,8 +44,7 @@ tracks/0/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "JumpEnd"
+[sub_resource type="Animation" id=5]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -76,8 +74,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "JumpStart"
+[sub_resource type="Animation" id=6]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -92,7 +89,7 @@ tracks/0/keys = {
 "values": [ 9, 10 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.5
 loop = true
 step = 0.05
@@ -129,7 +126,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -162,25 +159,23 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Jump"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "JumpEnd"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "JumpStart"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Mine"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Move"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
@@ -198,23 +193,25 @@ animation = "Move"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
-[sub_resource type="AnimationNodeStateMachine" id=23]
-states/Idle/node = SubResource( 8 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachine" id=24]
+states/Idle/node = SubResource( 9 )
 states/Idle/position = Vector2( 186, 79 )
-states/Jump/node = SubResource( 9 )
+states/Jump/node = SubResource( 10 )
 states/Jump/position = Vector2( 622, 226 )
-states/JumpEnd/node = SubResource( 10 )
+states/JumpEnd/node = SubResource( 11 )
 states/JumpEnd/position = Vector2( 380, 306 )
-states/JumpStart/node = SubResource( 11 )
+states/JumpStart/node = SubResource( 12 )
 states/JumpStart/position = Vector2( 530, 124 )
-states/Mine/node = SubResource( 12 )
+states/Mine/node = SubResource( 13 )
 states/Mine/position = Vector2( 186, 186 )
-states/Move/node = SubResource( 13 )
+states/Move/node = SubResource( 14 )
 states/Move/position = Vector2( 409, 79 )
-transitions = [ "Idle", "Move", SubResource( 14 ), "Move", "Idle", SubResource( 15 ), "Idle", "Mine", SubResource( 16 ), "Mine", "Idle", SubResource( 17 ), "Idle", "JumpStart", SubResource( 18 ), "JumpStart", "Idle", SubResource( 19 ), "JumpEnd", "Idle", SubResource( 20 ), "JumpStart", "Jump", SubResource( 21 ), "Jump", "JumpEnd", SubResource( 22 ) ]
+transitions = [ "Idle", "Move", SubResource( 15 ), "Move", "Idle", SubResource( 16 ), "Idle", "Mine", SubResource( 17 ), "Mine", "Idle", SubResource( 18 ), "Idle", "JumpStart", SubResource( 19 ), "JumpStart", "Idle", SubResource( 20 ), "JumpEnd", "Idle", SubResource( 21 ), "JumpStart", "Jump", SubResource( 22 ), "Jump", "JumpEnd", SubResource( 23 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
 
 [node name="CharacterTemplate" type="KinematicBody2D"]
 collision_layer = 2
@@ -227,7 +224,6 @@ controller_resource = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
 hframes = 12
-frame = 10
 
 [node name="MinigArea" type="Area2D" parent="Sprite"]
 position = Vector2( -12, 8 )
@@ -239,20 +235,20 @@ shape = SubResource( 1 )
 [node name="ActionArea" type="Area2D" parent="Sprite"]
 
 [node name="Collision" type="CollisionShape2D" parent="Sprite/ActionArea"]
-shape = SubResource( 25 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 2 )
-anims/Jump = SubResource( 3 )
-anims/JumpEnd = SubResource( 4 )
-anims/JumpStart = SubResource( 5 )
-anims/Mine = SubResource( 6 )
-anims/Move = SubResource( 7 )
+anims/Idle = SubResource( 3 )
+anims/Jump = SubResource( 4 )
+anims/JumpEnd = SubResource( 5 )
+anims/JumpStart = SubResource( 6 )
+anims/Mine = SubResource( 7 )
+anims/Move = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 23 )
+tree_root = SubResource( 24 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 24 )
+parameters/playback = SubResource( 25 )
 
 [node name="FxPlayer" type="AudioStreamPlayer2D" parent="."]
 

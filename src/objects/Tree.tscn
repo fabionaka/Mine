@@ -6,8 +6,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "Cutting"
-length = 3.0
-loop = true
+length = 3.5
 tracks/0/type = "audio"
 tracks/0/path = NodePath("TreeAudio")
 tracks/0/interp = 1
@@ -29,10 +28,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.001, 0.2, 0.3, 1.6, 1.9, 2.1, 2.3, 2.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.001, 0.2, 0.3, 1.6, 1.9, 2.1, 2.3, 2.7, 3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ -90.0, -90.0, -85.0, 3.33673, 2.0, 5.0, 3.0, 4.0 ]
+"values": [ -90.0, -90.0, -85.0, 3.33673, 2.0, 5.0, 3.0, 4.0, 4.0, -90.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Stages/Mature/Skeleton2D/Trunk/leaves:rotation_degrees")
@@ -41,10 +40,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 1.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 1.9, 3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, -3.0, -1.04348 ]
+"values": [ 0.0, 0.0, -3.0, -1.04348, -1.04348, 0.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Stages/Mature/Skeleton2D/Trunk/leaves/Leaves2:rotation_degrees")
@@ -53,10 +52,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5, 0.9, 1.5, 1.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.5, 0.9, 1.5, 1.9, 2.2, 3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, -4.0, -20.0, -6.0, -4.0 ]
+"values": [ 0.0, 0.0, -4.0, -20.0, -6.0, -4.0, 0.644633, -4.0, 0.0 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Stages/Mature/Skeleton2D/Trunk/leaves/Leaves2/top:rotation_degrees")
@@ -65,10 +64,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2, 1.1, 1.5, 1.8, 1.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 1.1, 1.5, 1.8, 1.9, 2.2, 3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, -26.0, -19.5, 2.7, 2.4 ]
+"values": [ 0.0, 0.0, -26.0, -19.5, 2.7, 2.4, 12.4047, 2.4, 0.0 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Stages/Mature/Skeleton2D/Trunk:position")
@@ -77,10 +76,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.2, 0.7, 1.1, 2.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.7, 1.1, 3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 16, 74 ), Vector2( 16, 74 ), Vector2( 17.733, 74 ), Vector2( 18.453, 74 ), Vector2( 18.985, 74 ) ]
+"values": [ Vector2( 16, 74 ), Vector2( 16, 74 ), Vector2( 17.733, 74 ), Vector2( 18.453, 74 ), Vector2( 18.985, 74 ), Vector2( 16, 74 ) ]
 }
 tracks/6/type = "method"
 tracks/6/path = NodePath(".")
@@ -95,6 +94,18 @@ tracks/6/keys = {
 "args": [  ],
 "method": "hide_tree"
 } ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Stages/Mature/Polygon2D:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -195,6 +206,102 @@ tracks/7/keys = {
 "update": 0,
 "values": [ -90.0 ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Stages/Decline/SkelDecline/Root:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Stages/Decline/SkelDecline/Root/Copa:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -0.5, 0.2 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Stages/Decline/SkelDecline/Root/Copa/Copa2:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Stages/Decline/SkelDecline/Root/Copa/Copa2/Top:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, -0.5, -1.5, 0.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Stages/Snag/SkelSnag/Root:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Stages/Snag/SkelSnag/Root/Copa:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.2, -0.2 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Stages/Snag/SkelSnag/Root/Copa/Copa2:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Stages/Snag/SkelSnag/Root/Copa/Copa2/Bone2D:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [node name="Tree" type="Node2D"]
 script = ExtResource( 2 )
@@ -206,15 +313,12 @@ anims/Wind-1 = SubResource( 2 )
 [node name="TreeAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.5, 0.5 )
-
 [node name="Stages" type="Node2D" parent="."]
 
 [node name="Trunk" type="Node2D" parent="Stages"]
 visible = false
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -227,19 +331,26 @@ region_rect = Rect2( 44, 24, 9, 9 )
 [node name="Seedling" type="Node2D" parent="Stages"]
 visible = false
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
+
+[node name="Sprite" type="Sprite" parent="Stages/Seedling"]
+position = Vector2( 0, -7 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 44, 33, 10, 16 )
 
 [node name="Sapling" type="Node2D" parent="Stages"]
 visible = false
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Polygon2D" type="Polygon2D" parent="Stages/Sapling"]
 position = Vector2( -49, -80 )
 texture = ExtResource( 1 )
-skeleton = NodePath("../Skeleton2D")
 polygon = PoolVector2Array( 51, 80, 51, 75, 55, 75, 55, 65, 54, 57, 51, 49, 48, 49, 44, 64, 43, 71, 43, 76, 47, 76, 47, 80 )
 polygons = [ PoolIntArray( 10, 1, 0, 11 ), PoolIntArray( 7, 3, 2, 1, 10, 9, 8 ), PoolIntArray( 7, 4, 3 ), PoolIntArray( 7, 6, 5, 4 ) ]
 bones = [ NodePath("Bone2D"), PoolRealArray( 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 ), NodePath("Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 ) ]
@@ -258,6 +369,9 @@ rest = Transform2D( 1, 0, 0, 1, 5, 2.18557e-07 )
 [node name="Bone2D" type="Bone2D" parent="Stages/Sapling/Skeleton2D/Bone2D/Bone2D"]
 position = Vector2( 11, 9.53674e-07 )
 rest = Transform2D( 1, 0, 0, 1, 11, 9.53674e-07 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Bone2D" type="Bone2D" parent="Stages/Sapling/Skeleton2D/Bone2D/Bone2D/Bone2D"]
 position = Vector2( 9, 0 )
@@ -267,6 +381,7 @@ default_length = 6.0
 [node name="Mature" type="Node2D" parent="Stages"]
 visible = false
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -289,30 +404,35 @@ position = Vector2( -16, -81 )
 
 [node name="Trunk" type="Bone2D" parent="Stages/Mature/Skeleton2D"]
 position = Vector2( 16, 74 )
-rotation = -1.56535
+rotation = -1.5708
 rest = Transform2D( -4.37114e-08, -1, 1, -4.37114e-08, 16, 74 )
 
 [node name="leaves" type="Bone2D" parent="Stages/Mature/Skeleton2D/Trunk"]
 position = Vector2( 12, 9.53674e-07 )
+rotation = -0.00311805
 rest = Transform2D( 1, 0, 0, 1, 12, 0 )
 default_length = 25.0
 
 [node name="Leaves2" type="Bone2D" parent="Stages/Mature/Skeleton2D/Trunk/leaves"]
 position = Vector2( 28, 3.8147e-06 )
+rotation = 0.0293175
 rest = Transform2D( 1, 0, 0, 1, 28, 3.8147e-06 )
 
 [node name="top" type="Bone2D" parent="Stages/Mature/Skeleton2D/Trunk/leaves/Leaves2"]
 position = Vector2( 30, 0 )
+rotation = -0.0184534
 rest = Transform2D( 1, 0, 0, 1, 30, 0 )
 default_length = 10.0
 
 [node name="Decline" type="Node2D" parent="Stages"]
 visible = false
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Sprite" type="Sprite" parent="Stages/Decline"]
+visible = false
 position = Vector2( 0, -38 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -321,14 +441,75 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Polygon2D" type="Polygon2D" parent="Stages/Decline"]
+position = Vector2( -139, -80 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../SkelDecline")
+polygon = PoolVector2Array( 143, 80, 143, 71, 157, 71, 157, 66, 153, 49, 150, 18, 144, 2, 139, 2, 133, 16, 127, 48, 122, 66, 122, 70, 136, 71, 136, 80 )
+polygons = [ PoolIntArray( 13, 12, 11, 10, 3, 2, 1, 0 ), PoolIntArray( 10, 9, 4, 3 ), PoolIntArray( 9, 8, 5, 4 ), PoolIntArray( 8, 7, 6, 5 ) ]
+bones = [ NodePath("Root"), PoolRealArray( 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 ), NodePath("Root/Copa"), PoolRealArray( 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0 ), NodePath("Root/Copa/Copa2"), PoolRealArray( 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0 ), NodePath("Root/Copa/Copa2/Top"), PoolRealArray( 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0 ) ]
+
+[node name="SkelDecline" type="Skeleton2D" parent="Stages/Decline"]
+
+[node name="Root" type="Bone2D" parent="Stages/Decline/SkelDecline"]
+rotation = -1.5708
+rest = Transform2D( -4.37114e-08, -1, 1, -4.37114e-08, 0, 0 )
+
+[node name="Copa" type="Bone2D" parent="Stages/Decline/SkelDecline/Root"]
+position = Vector2( 15, 0 )
+rotation = -0.00779513
+rest = Transform2D( 1, 0, 0, 1, 15, 0 )
+
+[node name="Copa2" type="Bone2D" parent="Stages/Decline/SkelDecline/Root/Copa"]
+position = Vector2( 16, 1.35505e-06 )
+rotation = 0.0140215
+rest = Transform2D( 1, 0, 0, 1, 16, 1.35505e-06 )
+
+[node name="Top" type="Bone2D" parent="Stages/Decline/SkelDecline/Root/Copa/Copa2"]
+position = Vector2( 30, 1.31134e-06 )
+rotation = -0.018679
+rest = Transform2D( 1, 0, 0, 1, 30, 1.31134e-06 )
+default_length = 17.0
+
 [node name="Snag" type="Node2D" parent="Stages"]
 visible = false
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Sprite" type="Sprite" parent="Stages/Snag"]
+visible = false
 position = Vector2( 0, -38 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 91, 3, 29, 77 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Stages/Snag"]
+position = Vector2( -105, -80 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../SkelSnag")
+polygon = PoolVector2Array( 109, 80, 109, 62, 120, 62, 120, 60, 118, 39, 116, 19, 107, 4, 104, 4, 97, 19, 94, 39, 91, 59, 91, 62, 101, 62, 101, 80 )
+uv = PoolVector2Array( 109, 80, 109, 62, 120, 62, 120, 60, 118, 39, 116, 19, 107, 4, 104, 4, 97, 19, 94, 39, 91, 59, 91, 62, 101, 62, 101, 80 )
+polygons = [ PoolIntArray( 13, 12, 1, 0 ), PoolIntArray( 11, 10, 9, 4, 3, 2, 1, 12 ), PoolIntArray( 9, 8, 5, 4 ), PoolIntArray( 8, 7, 6, 5 ) ]
+bones = [ NodePath("Root"), PoolRealArray( 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 ), NodePath("Root/Copa"), PoolRealArray( 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0 ), NodePath("Root/Copa/Copa2"), PoolRealArray( 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0 ), NodePath("Root/Copa/Copa2/Bone2D"), PoolRealArray( 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0 ) ]
+
+[node name="SkelSnag" type="Skeleton2D" parent="Stages/Snag"]
+
+[node name="Root" type="Bone2D" parent="Stages/Snag/SkelSnag"]
+rotation = -1.5708
+rest = Transform2D( -4.37114e-08, -1, 1, -4.37114e-08, 0, 0 )
+
+[node name="Copa" type="Bone2D" parent="Stages/Snag/SkelSnag/Root"]
+position = Vector2( 18, 7.86805e-07 )
+rotation = 0.00249054
+rest = Transform2D( 1, 0, 0, 1, 18, 7.86805e-07 )
+
+[node name="Copa2" type="Bone2D" parent="Stages/Snag/SkelSnag/Root/Copa"]
+position = Vector2( 23, 1.00536e-06 )
+rest = Transform2D( 1, 0, 0, 1, 23, 1.00536e-06 )
+
+[node name="Bone2D" type="Bone2D" parent="Stages/Snag/SkelSnag/Root/Copa/Copa2"]
+position = Vector2( 20, 1.90735e-06 )
+rest = Transform2D( 1, 0, 0, 1, 20, 1.90735e-06 )
+default_length = 14.0

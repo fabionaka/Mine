@@ -39,8 +39,6 @@ func _play_new_bg(from, to):
 
 
 func give_resources(pos : Vector2, ammount : int, type) -> void :
-	
-	print(pos, " | ", ammount, " | ", type)
 	var resource = load("res://objects/resources/Resource.tscn")
 	var layer = get_node("Layer2")
 	var i = 0
