@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/tilemap/ground_tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/objects/assets.png" type="Texture" id=6]
 [ext_resource path="res://objects/Placa.tscn" type="PackedScene" id=7]
 [ext_resource path="res://objects/Object.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/objects/plants.png" type="Texture" id=9]
 [ext_resource path="res://objects/lights/candle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/lights/lamp.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/resources/ResourceSpawner.tscn" type="PackedScene" id=12]
@@ -266,42 +265,6 @@ possui_acao = true
 [node name="LightTemplate" parent="Level/Layer1" instance=ExtResource( 10 )]
 position = Vector2( 150, 43 )
 possui_acao = true
-
-[node name="plants11" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 392, 40 )
-texture = ExtResource( 9 )
-region_enabled = true
-region_rect = Rect2( 48, 16, 16, 16 )
-
-[node name="plants2" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 263, 40 )
-texture = ExtResource( 9 )
-region_enabled = true
-region_rect = Rect2( 48, 0, 16, 16 )
-
-[node name="plants3" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 451, 40 )
-texture = ExtResource( 9 )
-region_enabled = true
-region_rect = Rect2( 48, 0, 16, 16 )
-
-[node name="plants4" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 344, 40 )
-texture = ExtResource( 9 )
-region_enabled = true
-region_rect = Rect2( 48, 16, 16, 16 )
-
-[node name="plants5" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 473, 40 )
-texture = ExtResource( 9 )
-region_enabled = true
-region_rect = Rect2( 48, 32, 16, 16 )
-
-[node name="plants6" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 464, 32 )
-texture = ExtResource( 9 )
-region_enabled = true
-region_rect = Rect2( 48, 48, 16, 32 )
 
 [node name="Placa" parent="Level/Layer1" instance=ExtResource( 7 )]
 position = Vector2( 288, 40 )

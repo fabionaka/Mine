@@ -7,6 +7,7 @@
 [sub_resource type="Animation" id=1]
 resource_name = "Cutting"
 length = 3.0
+loop = true
 tracks/0/type = "audio"
 tracks/0/path = NodePath("TreeAudio")
 tracks/0/interp = 1
@@ -213,25 +214,35 @@ zoom = Vector2( 0.5, 0.5 )
 
 [node name="Trunk" type="Node2D" parent="Stages"]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="Stages/Trunk"]
-position = Vector2( 1, -8 )
+position = Vector2( 0, -3 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 48, 16, 16, 16 )
+region_rect = Rect2( 44, 24, 9, 9 )
 
 [node name="Seedling" type="Node2D" parent="Stages"]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sapling" type="Node2D" parent="Stages"]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Polygon2D" type="Polygon2D" parent="Stages/Sapling"]
-position = Vector2( -56, -80 )
+position = Vector2( -49, -80 )
 texture = ExtResource( 1 )
-polygon = PoolVector2Array( 58, 80, 58, 79, 57, 79, 57, 75, 62, 75, 62, 65, 61, 57, 58, 49, 56, 49, 54, 53, 51, 64, 50, 71, 50, 73, 51, 75, 52, 76, 54, 76, 54, 80 )
-uv = PoolVector2Array( 58, 80, 58, 79, 57, 79, 57, 75, 62, 75, 62, 65, 61, 57, 58, 49, 56, 49, 54, 53, 51, 64, 50, 71, 50, 73, 51, 75, 52, 76, 54, 76, 54, 80 )
-polygons = [ PoolIntArray( 16, 15, 3, 2, 1, 0 ), PoolIntArray( 10, 5, 4, 3, 15, 14, 13, 12, 11 ), PoolIntArray( 9, 6, 5, 10 ), PoolIntArray( 9, 8, 7, 6 ) ]
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 51, 80, 51, 75, 55, 75, 55, 65, 54, 57, 51, 49, 48, 49, 44, 64, 43, 71, 43, 76, 47, 76, 47, 80 )
+polygons = [ PoolIntArray( 10, 1, 0, 11 ), PoolIntArray( 7, 3, 2, 1, 10, 9, 8 ), PoolIntArray( 7, 4, 3 ), PoolIntArray( 7, 6, 5, 4 ) ]
+bones = [ NodePath("Bone2D"), PoolRealArray( 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 ), NodePath("Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0 ), NodePath("Bone2D/Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 ) ]
 
 [node name="Skeleton2D" type="Skeleton2D" parent="Stages/Sapling"]
 
@@ -255,49 +266,69 @@ default_length = 6.0
 
 [node name="Mature" type="Node2D" parent="Stages"]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite2" type="Sprite" parent="Stages/Mature"]
-position = Vector2( 1, -8 )
+position = Vector2( 0, -3 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 48, 16, 16, 16 )
+region_rect = Rect2( 44, 24, 9, 9 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Stages/Mature"]
-position = Vector2( -24, -86 )
+position = Vector2( -19, -86 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../Skeleton2D")
-polygon = PoolVector2Array( 29, 80, 29, 72, 44, 72, 44, 66, 43, 60, 37, 40, 33, 27, 30, 12, 27, 0, 24, 0, 21, 12, 17, 27, 15, 39, 10, 60, 9, 66, 7, 72, 22, 72, 22, 80 )
-uv = PoolVector2Array( 29, 80, 29, 72, 44, 72, 44, 66, 43, 60, 37, 40, 33, 27, 30, 12, 27, 0, 24, 0, 21, 12, 17, 27, 15, 39, 10, 60, 9, 66, 7, 72, 22, 72, 22, 80 )
+polygon = PoolVector2Array( 22, 80, 22, 72, 37, 72, 37, 66, 36, 60, 30, 40, 26, 27, 23, 12, 20, 0, 17, 0, 13, 12, 10, 27, 8, 39, 3, 60, 2, 66, -1, 72, 15, 72, 15, 80 )
 polygons = [ PoolIntArray( 14, 15, 16, 17, 0, 1, 2, 3 ), PoolIntArray( 14, 13, 12, 5, 4, 3 ), PoolIntArray( 12, 11, 10, 7, 6, 5 ), PoolIntArray( 10, 9, 8, 7 ) ]
 bones = [ NodePath("Trunk"), PoolRealArray( 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 ), NodePath("Trunk/leaves"), PoolRealArray( 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 ), NodePath("Trunk/leaves/Leaves2"), PoolRealArray( 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 ), NodePath("Trunk/leaves/Leaves2/top"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 ) ]
 
 [node name="Skeleton2D" type="Skeleton2D" parent="Stages/Mature"]
-position = Vector2( -15, -80 )
+position = Vector2( -16, -81 )
 
 [node name="Trunk" type="Bone2D" parent="Stages/Mature/Skeleton2D"]
-position = Vector2( 15, 74 )
-rotation = -1.5708
+position = Vector2( 16, 74 )
+rotation = -1.56535
 rest = Transform2D( -4.37114e-08, -1, 1, -4.37114e-08, 16, 74 )
 
 [node name="leaves" type="Bone2D" parent="Stages/Mature/Skeleton2D/Trunk"]
 position = Vector2( 12, 9.53674e-07 )
-rotation = -0.0182121
 rest = Transform2D( 1, 0, 0, 1, 12, 0 )
 default_length = 25.0
 
 [node name="Leaves2" type="Bone2D" parent="Stages/Mature/Skeleton2D/Trunk/leaves"]
 position = Vector2( 28, 3.8147e-06 )
-rotation = -0.0698132
 rest = Transform2D( 1, 0, 0, 1, 28, 3.8147e-06 )
 
 [node name="top" type="Bone2D" parent="Stages/Mature/Skeleton2D/Trunk/leaves/Leaves2"]
 position = Vector2( 30, 0 )
-rotation = 0.0418879
 rest = Transform2D( 1, 0, 0, 1, 30, 0 )
 default_length = 10.0
 
 [node name="Decline" type="Node2D" parent="Stages"]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Stages/Decline"]
+position = Vector2( 0, -38 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 121, 4, 38, 76 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Snag" type="Node2D" parent="Stages"]
 visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Stages/Snag"]
+position = Vector2( 0, -38 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 91, 3, 29, 77 )

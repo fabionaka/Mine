@@ -12,12 +12,12 @@ enum Stages {
 }
 var current_stage = Stages.MATURE setget set_current_stage
 var life_cycle_conf = [
-	{"name":Stages.SEEDLING,"to": Stages.SAPLING, "time": 3, "node": "Stages/Seedling",},
-	{"name":Stages.SAPLING,"to": Stages.MATURE, "time": 3, "node": "Stages/Sapling",},
-	{"name":Stages.MATURE,"to": Stages.DECLINE, "time": 3, "node": "Stages/Mature",},
-	{"name":Stages.DECLINE,"to": Stages.SNAG, "time": 3, "node": "Stages/Decline",},
-	{"name":Stages.SNAG,"to": Stages.TRUNK, "time": 3, "node": "Stages/Snag",},
-	{"name":Stages.TRUNK,"to": Stages.SEEDLING, "time": 3, "node": "Stages/Trunk",},
+	{"name":Stages.SEEDLING,"to": Stages.SAPLING, "time": 3, "node": "Stages/Seedling", "to_node": "Stages/Sapling",},
+	{"name":Stages.SAPLING,"to": Stages.MATURE, "time": 3, "node": "Stages/Sapling", "to_node": "Stages/Mature",},
+	{"name":Stages.MATURE,"to": Stages.DECLINE, "time": 3, "node": "Stages/Mature", "to_node": "Stages/Decline",},
+	{"name":Stages.DECLINE,"to": Stages.SNAG, "time": 3, "node": "Stages/Decline", "to_node": "Stages/Snag",},
+	{"name":Stages.SNAG,"to": Stages.TRUNK, "time": 3, "node": "Stages/Snag", "to_node": "Stages/Trunk",},
+	{"name":Stages.TRUNK,"to": Stages.SEEDLING, "time": 3, "node": "Stages/Trunk", "to_node": "Stages/Seedling"},
 ]
 onready var level = get_tree().get_root().get_node("Game/Level")
 onready var tree_stages = get_node("Stages")
@@ -60,11 +60,13 @@ func _ready():
 	
 
 func cut_down_tree():
-	$AnimationPlayer.play("Cutting")
+	print(current_stage)
+	if current_stage == Stages.MATURE :
+		$AnimationPlayer.play("Cutting")
 	
 
 func hide_tree():
-	$Polygon2D.hide()
+	$Stages/Mature/Polygon2D.hide()
 	var rnd = RandomNumberGenerator.new()
 	rnd.randomize()
 	emit_signal("tree_cutted", Vector2(global_position.x, global_position.y + -10), rnd.randf_range(5, 10), "wood")
@@ -72,15 +74,12 @@ func hide_tree():
 	queue_free()
 
 func set_current_stage(stage):
-	current_stage = stage.to
-	
-	var target_node = get_node(stage.node)
-	
-	for child in tree_stages.get_children():
-		child.hide()
-	
-	print(target_node)
+	var target_node = get_node(stage.to_node)
+	var current_node = get_node(stage.node)
+
+	current_node.hide()
 	target_node.show()
+	current_stage = stage.to
 	
 	do_life_cicle()
 
