@@ -2,6 +2,9 @@ extends "res://objects/Object.gd"
 
 onready var level = get_tree().get_root().get_node("Game/Level")
 
+func _ready() :
+	add_to_group("game_resource")
+
 func do_action() -> void:
 	var game_resources = GameMaterials.new()
 	var rnd = RandomNumberGenerator.new()

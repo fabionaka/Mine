@@ -26,11 +26,6 @@ var ready = false
 onready var level = get_tree().get_root().get_node("Game/Level")
 onready var tree_stages = get_node("Stages")
 
-func _physics_process(delta):
-
-	if Input.is_action_just_pressed("dig"):
-		cut_down_tree()
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var rnd = RandomNumberGenerator.new()

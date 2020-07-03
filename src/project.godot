@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://globals/generic_controller.gd"
 }, {
+"base": "Reference",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://globals/inventory.gd"
+}, {
 "base": "Node2D",
 "class": "TileManager",
 "language": "GDScript",
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "Character": "",
 "GameMaterials": "",
 "GenericController": "",
+"Inventory": "",
 "TileManager": ""
 }
 

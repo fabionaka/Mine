@@ -302,6 +302,9 @@ position = Vector2( 498, 48 )
 [node name="Tree12" parent="Level/Layer1" instance=ExtResource( 19 )]
 position = Vector2( 531, 48 )
 
+[node name="ResourceSpawner" parent="Level/Layer1" instance=ExtResource( 12 )]
+position = Vector2( 368, 41 )
+
 [node name="Actors" type="Node2D" parent="Level"]
 
 [node name="Dog" parent="Level/Actors" instance=ExtResource( 18 )]
@@ -315,7 +318,7 @@ scale = Vector2( 1, -1 )
 collision_mask = 1
 
 [node name="Player" parent="Level/Actors" instance=ExtResource( 2 )]
-position = Vector2( 487, 33 )
+position = Vector2( 682, 39 )
 character_resource = ExtResource( 5 )
 controller_resource = ExtResource( 4 )
 minig_resource = ExtResource( 24 )
@@ -350,5 +353,10 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 196626, 1, 0, 196627, 1, 0, 196628, 1, 0, 196629, 1, 0, 196630, 1, 0, 196631, 1, 0, 196632, 1, 0, 196633, 1, 0, 196634, 1, 0, 196635, 1, 0, 196636, 1, 0, 196637, 1, 0, 196638, 1, 0 )
 
-[node name="ResourceSpawner" parent="." instance=ExtResource( 12 )]
-position = Vector2( 368, 41 )
+[node name="UI" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

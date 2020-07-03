@@ -15,6 +15,8 @@ export (Resource) var controller_resource
 export (Resource) var minig_resource
 export (bool) var look_at_player = false
 export (bool) var has_bg_sound = false
+export (Resource) var inventory
+export (PackedScene) var inventory_ui
 
 var velocity = Vector2.ZERO
 var state = MOVE
@@ -153,11 +155,11 @@ func setup_bgx(set_bus, snd):
 		tween.start()
 		yield(tween, "tween_completed")
 		bg_snd_player.stream = load(snd)
-		bg_snd_player.playing = false
+		bg_snd_player.stop()
 	
 	if !bg_snd_player.playing :
 		bg_snd_player.stream = load(snd)
-		bg_snd_player.playing = true
+		bg_snd_player.play()
 		tween.interpolate_property(bg_snd_player, "volume_db",
 		-80, 0, 1,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
