@@ -9,6 +9,7 @@ export (int) var fuel = 0 setget add_fuel
 onready var light = $Light2D
 onready var local_energy : float = light.energy
 onready var local_texture_scale : float = light.texture_scale
+onready var animation_player= $AnimationPlayer
 
 func _ready():
 	_turn_on()
@@ -23,12 +24,15 @@ func _flickering():
 
 
 func _turn_on() -> void:
+	print("_turn_on ",light.enabled)
 	light.enabled = true
-	$AnimationPlayer.play("Light")
+	animation_player.play("Light")
+	
 	
 func _turn_off() -> void:
+	print("_turn_off ",light.enabled)
 	light.enabled = false
-	$AnimationPlayer.play("Off")
+	animation_player.play("Off")
 	
 
 func add_fuel(value) :

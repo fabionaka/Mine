@@ -14,12 +14,12 @@ enum Stages {
 var is_chopping = false
 var current_stage  setget set_current_stage
 var life_cycle_conf = [
-	{"name":Stages.SEEDLING,"to": Stages.SAPLING, "time": 120, "node": "Stages/Seedling", "to_node": "Stages/Sapling",},
-	{"name":Stages.SAPLING,"to": Stages.MATURE, "time": 120, "node": "Stages/Sapling", "to_node": "Stages/Mature",},
-	{"name":Stages.MATURE,"to": Stages.DECLINE, "time": 120, "node": "Stages/Mature", "to_node": "Stages/Decline",},
-	{"name":Stages.DECLINE,"to": Stages.SNAG, "time": 120, "node": "Stages/Decline", "to_node": "Stages/Snag",},
-	{"name":Stages.SNAG,"to": Stages.TRUNK, "time": 120, "node": "Stages/Snag", "to_node": "Stages/Trunk",},
-	{"name":Stages.TRUNK,"to": Stages.SEEDLING, "time": 120, "node": "Stages/Trunk", "to_node": "Stages/Seedling"},
+	{"name":Stages.SEEDLING,"to": Stages.SAPLING, "time": 60, "node": "Stages/Seedling", "to_node": "Stages/Sapling",},
+	{"name":Stages.SAPLING,"to": Stages.MATURE, "time": 60, "node": "Stages/Sapling", "to_node": "Stages/Mature",},
+	{"name":Stages.MATURE,"to": Stages.DECLINE, "time": 60, "node": "Stages/Mature", "to_node": "Stages/Decline",},
+	{"name":Stages.DECLINE,"to": Stages.SNAG, "time": 60, "node": "Stages/Decline", "to_node": "Stages/Snag",},
+	{"name":Stages.SNAG,"to": Stages.TRUNK, "time": 60, "node": "Stages/Snag", "to_node": "Stages/Trunk",},
+	{"name":Stages.TRUNK,"to": Stages.SEEDLING, "time": 60, "node": "Stages/Trunk", "to_node": "Stages/Seedling"},
 ]
 var ready = false
 
@@ -28,6 +28,8 @@ onready var tree_stages = get_node("Stages")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Stages/Mature.hide()
+	add_to_group("trees")
 	var rnd = RandomNumberGenerator.new()
 	# inicia ciclo de vida da árvore
 	if !current_stage :
@@ -35,8 +37,7 @@ func _ready():
 		current_stage = floor(rnd.randf_range(0, 5))
 		
 	set_current_stage(_search_stage(current_stage))
-			
-			
+	
 	
 	
 	rnd.randomize()
@@ -55,8 +56,9 @@ func _ready():
 	connect("tree_cutted", level, "give_resources")
 
 
-func cut_down_tree() -> void:
+func cut_down_tree(direction) -> void:
 	if current_stage == Stages.MATURE :
+		self.scale.x = direction
 		is_chopping = true
 		$AnimationPlayer.play("Cutting")
 
@@ -67,7 +69,8 @@ func hide_tree() -> void:
 	is_chopping = false
 	emit_signal("tree_cutted", Vector2(global_position.x, global_position.y + -10), rnd.randf_range(5, 10), "wood")
 	get_node("Stages/Mature").hide()
-	set_current_stage(_search_stage(Stages.TRUNK))
+	scale.x = 1
+	set_current_stage(_search_stage(Stages.SNAG))
 
 
 func set_current_stage(stage) -> void:

@@ -17,7 +17,7 @@ export (bool) var look_at_player = false
 export (bool) var has_bg_sound = false
 export (Resource) var inventory
 export (PackedScene) var inventory_ui
-
+  
 var velocity = Vector2.ZERO
 var state = MOVE
 
@@ -95,9 +95,10 @@ func start_mining () -> void :
 
 	if is_instance_valid(tile_map):
 		var mine_direction = $Sprite.scale.x
+		var world_position = $Sprite/MinigArea.global_position
 		var tile_position = tile_manager.tile_map.world_to_map($Sprite/MinigArea.global_position)
 		
-		tile_manager.mine_tile(tile_position, mine_direction)
+		tile_manager.mine_tile(tile_position, mine_direction, world_position)
 	
 func rotate_sprite() -> void:
 	sprite.scale.x = controller.rotate_sprite(sprite.scale.x)
@@ -174,8 +175,9 @@ func do_action():
 	var ignore_list = ['Sprite']
 	
 	for a in action_area.get_overlapping_areas() :
-		var body_area = a.get_parent()
-		
-		if a.get_parent().get_groups().has("actions"):
-			body_area.do_action()
-	
+		if a.name == "AreaEffect" :
+			var body_area = a.get_parent()
+			
+			if a.get_parent().get_groups().has("actions"):
+				body_area.do_action()
+				return 

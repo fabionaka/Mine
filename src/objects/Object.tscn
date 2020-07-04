@@ -36,7 +36,7 @@ __meta__ = {
 
 [node name="AreaEffect" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaEffect"]
+[node name="AECollision" type="CollisionShape2D" parent="AreaEffect"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 2 )
 

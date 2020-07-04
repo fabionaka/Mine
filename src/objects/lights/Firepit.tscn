@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/lights/light_template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/objects/fogueira.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Light"
@@ -55,8 +57,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Off"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -85,13 +86,17 @@ tracks/1/keys = {
 [node name="Firepit" instance=ExtResource( 1 )]
 possui_acao = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaEffect" index="0"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 2 )
+
 [node name="Sprite" parent="." index="3"]
 texture = ExtResource( 2 )
 vframes = 1
 hframes = 10
-frame = 0
+frame = 5
 region_rect = Rect2( 0, 0, 0, 0 )
 
 [node name="AnimationPlayer" parent="." index="4"]
 anims/Light = SubResource( 1 )
-anims/Off = SubResource( 2 )
+anims/Off = SubResource( 3 )

@@ -51,6 +51,13 @@ func move_control(delta, velocity : Vector2) -> Vector2:
 	return velocity 
 
 func dig_control(_delta) -> Vector2:
+	var action_area = local_parent.get_node("Sprite/MinigArea")
+	var tree
+	for a in action_area.get_overlapping_areas() :
+		var element = a.get_parent()
+		if element.get_groups().has("trees") :
+			element.cut_down_tree(local_parent.get_node("Sprite").scale.x * -1)
+			
 	animation_state.travel("Mine")
 	return Vector2.ZERO
 	
@@ -74,6 +81,8 @@ func jump_control(_delta, velocity : Vector2, ray) -> Vector2:
 	else  : 
 		jump_height.enabled = false
 		velocity.y += 12
+		if velocity.y > 300 :
+			velocity.y = 300
 		jumping = false
 		
 	

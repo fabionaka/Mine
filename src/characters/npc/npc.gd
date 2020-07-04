@@ -28,3 +28,12 @@ func _modulate_sprite() -> void:
 	rand.randomize()
 	$Sprite.self_modulate = Color(1,1,1,rand.randf_range(0.5, 1) )
 
+func took_hit(hit) :
+	character.health -= hit
+	print(character.health)
+	if character.health <= 0 :
+		controller.target = null
+		$AnimationPlayer.play("Death")
+		
+func death() :
+	queue_free()

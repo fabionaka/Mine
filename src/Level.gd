@@ -46,7 +46,7 @@ func give_resources(pos : Vector2, ammount : int, type) -> void :
 	while i < ammount :
 		var rnd = RandomNumberGenerator.new()
 		rnd.randomize()
-		var linear_velocity = Vector2(rnd.randf_range(-10,10), -80)
+		var linear_velocity = Vector2(rnd.randf_range(-20,20), -50)
 		var instantiated = resource.instance()
 		instantiated.config_material = type
 		instantiated.global_position = pos

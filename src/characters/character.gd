@@ -11,7 +11,8 @@ var group_name : String
 var max_speed : int = 100
 var max_acceleration : int = 500
 var friction : int = 500
-var health : int = 0
+var health : float = 0
+var hit : float = 0
 
 func _init():
 	active_camera = false

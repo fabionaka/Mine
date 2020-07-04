@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/objects/plants.png" type="Texture" id=1]
 [ext_resource path="res://objects/Tree.gd" type="Script" id=2]
@@ -303,6 +303,9 @@ tracks/15/keys = {
 "values": [ 0.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 10 )
+
 [node name="Tree" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -380,7 +383,6 @@ rest = Transform2D( 1, 0, 0, 1, 9, 0 )
 default_length = 6.0
 
 [node name="Mature" type="Node2D" parent="Stages"]
-visible = false
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -514,3 +516,9 @@ rest = Transform2D( 1, 0, 0, 1, 23, 1.00536e-06 )
 position = Vector2( 20, 1.90735e-06 )
 rest = Transform2D( 1, 0, 0, 1, 20, 1.90735e-06 )
 default_length = 14.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -10 )
+shape = SubResource( 3 )
