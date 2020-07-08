@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/objects/grass.png" type="Texture" id=1]
+[ext_resource path="res://objects/world/grass.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Grass" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Stages" type="Node2D" parent="."]
+
+[node name="Sprout" type="Node2D" parent="Stages"]
+visible = false
+
+[node name="Polygon2D" type="Polygon2D" parent="Stages/Sprout"]
+position = Vector2( -9, -17 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../../../Skeleton2D")
+polygon = PoolVector2Array( 1, 17, 17, 17, 17, 9, 17, 1, 1, 1, 1, 9 )
+uv = PoolVector2Array( 1, 17, 17, 17, 17, 9, 17, 1, 1, 1, 1, 9 )
+bones = [ NodePath("Bone2D"), PoolRealArray( 1, 1, 1, 0, 0, 1 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 0, 1, 1, 1, 1 ) ]
+
+[node name="Leafing" type="Node2D" parent="Stages"]
+visible = false
+
+[node name="Polygon2D2" type="Polygon2D" parent="Stages/Leafing"]
+position = Vector2( -9, -17 )
+texture = ExtResource( 1 )
+texture_offset = Vector2( 18, 0 )
+skeleton = NodePath("../../../Skeleton2D")
+polygon = PoolVector2Array( 1, 17, 17, 17, 17, 9, 17, 1, 1, 1, 1, 9 )
+uv = PoolVector2Array( 1, 17, 17, 17, 17, 9, 17, 1, 1, 1, 1, 9 )
+bones = [ NodePath("Bone2D"), PoolRealArray( 1, 1, 1, 0, 0, 1 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 0, 1, 1, 1, 1 ) ]
+
+[node name="Grown" type="Node2D" parent="Stages"]
+
+[node name="Polygon2D3" type="Polygon2D" parent="Stages/Grown"]
+position = Vector2( -9, -17 )
+texture = ExtResource( 1 )
+texture_offset = Vector2( 34, 0 )
+skeleton = NodePath("../../../Skeleton2D")
+polygon = PoolVector2Array( 1, 17, 17, 17, 17, 9, 17, 1, 1, 1, 1, 9 )
+uv = PoolVector2Array( 1, 17, 17, 17, 17, 9, 17, 1, 1, 1, 1, 9 )
+bones = [ NodePath("Bone2D"), PoolRealArray( 1, 1, 1, 0, 0, 1 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 0, 1, 1, 1, 1 ) ]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="Bone2D" type="Bone2D" parent="Skeleton2D"]
+rotation = -1.5708
+rest = Transform2D( -4.37114e-08, -1, 1, -4.37114e-08, 0, 0 )
+
+[node name="Bone2D" type="Bone2D" parent="Skeleton2D/Bone2D"]
+position = Vector2( 7, 0 )
+rest = Transform2D( 1, 0, 0, 1, 7, 3.0598e-07 )
+default_length = 8.0
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AreaEffect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaEffect"]
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
+[connection signal="body_entered" from="AreaEffect" to="." method="_on_AreaEffect_body_entered"]
+[connection signal="body_exited" from="AreaEffect" to="." method="_on_AreaEffect_body_exited"]

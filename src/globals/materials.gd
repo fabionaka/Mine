@@ -4,6 +4,7 @@ var materials = [
 	{"name": "wood", "icon": "res://assets/resouce/r-01-wood.png", "lifetime": 12,"value":50,},
 	{"name": "rock", "icon": "res://assets/resouce/r-02-rock.png", "lifetime": 5,"value": 25,},
 	{"name": "gold", "icon": "res://assets/resouce/r-03-gold.png", "lifetime": 7,"value": 100},
+	{"name": "diamond", "icon": "res://assets/resouce/r-03-gold.png", "lifetime": 7,"value": 100},
 	{"name": "water", },
 ]
 var materials_name : Array;

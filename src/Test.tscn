@@ -7,9 +7,8 @@
 [ext_resource path="res://characters/player/player.gd" type="Script" id=5]
 [ext_resource path="res://assets/objects/assets.png" type="Texture" id=6]
 [ext_resource path="res://objects/Placa.tscn" type="PackedScene" id=7]
-[ext_resource path="res://objects/Object.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/lights/Firepit.tscn" type="PackedScene" id=8]
 [ext_resource path="res://reset_pos.gd" type="Script" id=9]
-[ext_resource path="res://objects/lights/candle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/lights/lamp.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/resources/ResourceSpawner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://characters/npc/Ghost.tscn" type="PackedScene" id=13]
@@ -18,12 +17,13 @@
 [ext_resource path="res://assets/background/bg-2.png" type="Texture" id=16]
 [ext_resource path="res://assets/background/bg-4.png" type="Texture" id=17]
 [ext_resource path="res://characters/npc/Dog.tscn" type="PackedScene" id=18]
-[ext_resource path="res://objects/Tree.tscn" type="PackedScene" id=19]
+[ext_resource path="res://objects/world/Tree.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Level.gd" type="Script" id=20]
 [ext_resource path="res://assets/objects/set.png" type="Texture" id=21]
 [ext_resource path="res://objects/Portal.tscn" type="PackedScene" id=22]
 [ext_resource path="res://characters/npc/ghost_controller.gd" type="Script" id=23]
 [ext_resource path="res://globals/tile_manager.gd" type="Script" id=24]
+[ext_resource path="res://objects/world/grass.tscn" type="PackedScene" id=25]
 
 [sub_resource type="TileSet" id=1]
 0/name = "assets.png 0"
@@ -296,14 +296,6 @@ position = Vector2( 455, 48 )
 [node name="Tree8" parent="Level/Layer1" instance=ExtResource( 19 )]
 position = Vector2( 419, 48 )
 
-[node name="Candle" parent="Level/Layer1" instance=ExtResource( 10 )]
-position = Vector2( 686, 43 )
-possui_acao = true
-
-[node name="Candle2" parent="Level/Layer1" instance=ExtResource( 10 )]
-position = Vector2( 151, 43 )
-possui_acao = true
-
 [node name="Lamp" parent="Level/Layer1" instance=ExtResource( 11 )]
 position = Vector2( -9, 26 )
 possui_acao = true
@@ -315,6 +307,9 @@ possui_acao = true
 [node name="Lamp3" parent="Level/Layer1" instance=ExtResource( 11 )]
 position = Vector2( -120, 12 )
 possui_acao = true
+
+[node name="Firepit" parent="Level/Layer1" instance=ExtResource( 8 )]
+position = Vector2( 142, 38 )
 
 [node name="Actors" type="Node2D" parent="Level"]
 
@@ -330,7 +325,7 @@ collision_mask = 1
 controller_resource = ExtResource( 23 )
 
 [node name="Player" parent="Level/Actors" instance=ExtResource( 2 )]
-position = Vector2( 663, 35 )
+position = Vector2( 709, 38 )
 character_resource = ExtResource( 5 )
 controller_resource = ExtResource( 4 )
 minig_resource = ExtResource( 24 )
@@ -338,11 +333,40 @@ has_bg_sound = true
 
 [node name="Layer2" type="Node2D" parent="Level"]
 
-[node name="Object" parent="Level/Layer2" instance=ExtResource( 8 )]
-position = Vector2( 328, 40 )
-
 [node name="Portal" parent="Level/Layer2" instance=ExtResource( 22 )]
+light_mask = 3
 position = Vector2( 168.101, 32.0421 )
+
+[node name="Grass" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 632, 48 )
+
+[node name="Grass2" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 612, 48 )
+
+[node name="Grass3" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 596, 48 )
+
+[node name="Grass5" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 585, 48 )
+
+[node name="Grass6" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 649, 48 )
+
+[node name="Grass4" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 622, 48 )
+
+[node name="Grass7" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 565, 48 )
+
+[node name="Grass8" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 574, 48 )
+
+[node name="Grass9" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 542, 48 )
+
+[node name="Grass10" parent="Level/Layer2" instance=ExtResource( 25 )]
+position = Vector2( 512, 48 )
+scale = Vector2( 1, 0.9616 )
 
 [node name="TileMap2" type="TileMap" parent="Level"]
 tile_set = ExtResource( 1 )
