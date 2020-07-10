@@ -30,7 +30,7 @@ onready var player = get_node("Actors/Player")
 #	player.bg_snd_player.stream = load(snd)
 	
 
-func _play_new_bg(from, to):
+func _play_new_bg(_from, to):
 	match to :
 		Space.WOODS :
 			player.setup_bgx(Bus.MASTER, "res://sounds/bg/woods-sound-bg.ogg")
@@ -53,3 +53,11 @@ func give_resources(pos : Vector2, ammount : int, type) -> void :
 		instantiated.linear_velocity = linear_velocity
 		layer.add_child(instantiated)
 		i += 1
+
+func add_item_to_inventory(body, item_resource) :
+	var item = item_resource.game_materials.get_game_material_by_name(item_resource.config_material)
+	body.inventory.add_item_to(item, 1)
+	
+	# remove por enquanto 
+	item_resource.queue_free()
+	

@@ -25,12 +25,16 @@ var ready = false
 
 onready var level = get_tree().get_root().get_node("Game/Level")
 onready var tree_stages = get_node("Stages")
+onready var tree_timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Stages/Mature.hide()
 	add_to_group("trees")
 	var rnd = RandomNumberGenerator.new()
+
+	add_child(tree_timer)
+
 	# inicia ciclo de vida da árvore
 	if !current_stage :
 		rnd.randomize()
@@ -90,13 +94,10 @@ func do_life_cicle() -> void:
 	rnd.randomize()
 	var deflator = rnd.randf_range(0.7, 1.3)
 	var data = _search_stage(current_stage)
-			
-	var tree_timer = Timer.new()
-	add_child(tree_timer)
+
 	tree_timer.start(deflator * data.time)
 	
 	yield(tree_timer,"timeout")
-	tree_timer.queue_free()
 	
 	if is_chopping : 
 		return 

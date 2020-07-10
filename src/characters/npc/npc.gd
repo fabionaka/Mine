@@ -30,7 +30,6 @@ func _modulate_sprite() -> void:
 
 func took_hit(hit) :
 	character.health -= hit
-	print(character.health)
 	if character.health <= 0 :
 		controller.target = null
 		$AnimationPlayer.play("Death")

@@ -19,16 +19,16 @@ func get_tile_map() -> TileMap:
 	return tile_map
 
 func mine_tile(tile_position : Vector2, direction : int, world_position : Vector2) -> void:
-	if hitable_tiles.has(tile_map.get_cell(tile_position.x, tile_position.y)) :
+	if hitable_tiles.has(tile_map.get_cell(int(tile_position.x), int(tile_position.y))) :
 		var tile = {
 			"position": tile_position,
 			"max_hits": 1,
 			"hit": 1,
-			"tile_type": tile_map.get_cell(tile_position.x, tile_position.y),
+			"tile_type": tile_map.get_cell(int(tile_position.x), int(tile_position.y)),
 		}
 		
 		for t in tile_hited :
-			if t.position == tile_position and t.tile_type == tile_map.get_cell(tile_position.x, tile_position.y) : 
+			if t.position == tile_position and t.tile_type == tile_map.get_cell(int(tile_position.x), int(tile_position.y)) : 
 				current_tile = t
 		
 		
@@ -61,8 +61,8 @@ func _chage_to_dig_tile(tile_position: Vector2, _direction,  world_position : Ve
 	if chance_s > 0.7: 
 		tile_s = 17
 	
-	tile_map.set_cell(tile_position.x, tile_position.y, tile_f)
-	tile_map.set_cell(tile_position.x, tile_position.y -1, tile_s)
+	tile_map.set_cell(int(tile_position.x), int(tile_position.y), tile_f)
+	tile_map.set_cell(int(tile_position.x), int(tile_position.y) -1, tile_s)
 	tile_hited.erase(current_tile)
 	current_tile = null
 	
@@ -71,7 +71,6 @@ func _chage_to_dig_tile(tile_position: Vector2, _direction,  world_position : Ve
 	var puff_res = load("res://globals/puff.tscn")
 	var puff = puff_res.instance()
 	var puff2 = puff_res.instance()
-	print(_direction)
 	puff.global_position = world_position + Vector2(_direction * 10, -2)
 	puff.rotation = rand_f.randf_range(-360,0)
 	
@@ -82,11 +81,11 @@ func _chage_to_dig_tile(tile_position: Vector2, _direction,  world_position : Ve
 	parent.add_child(puff)
 	parent.add_child(puff2)
 	
-func _chage_floor_tile(tile_position: Vector2, _direction, world_position : Vector2):
-	tile_map.set_cell(tile_position.x, tile_position.y + 1, 1)
+func _chage_floor_tile(tile_position: Vector2, _direction, _world_position : Vector2):
+	tile_map.set_cell(int(tile_position.x), int(tile_position.y) + 1, 1)
 	
-func _chage_ceiling_tile(tile_position: Vector2, _direction, world_position : Vector2):
-	tile_map.set_cell(tile_position.x, tile_position.y - 2, 6)
+func _chage_ceiling_tile(tile_position: Vector2, _direction, _world_position : Vector2):
+	tile_map.set_cell(int(tile_position.x), int(tile_position.y )- 2, 6)
 	
 func _chage_wall_tile(tile_position: Vector2, direction, world_position : Vector2):
 	# Direção está invertida
@@ -98,13 +97,13 @@ func _chage_wall_tile(tile_position: Vector2, direction, world_position : Vector
 		tl = 3
 		
 	
-	if wall_tiles.has(tile_map.get_cell(tile_position.x + (direction * 2), tile_position.y)) :
-		tile_map.set_cell(tile_position.x + direction , tile_position.y, tl)
-		tile_map.set_cell(tile_position.x + direction , tile_position.y -1, tl)
+	if wall_tiles.has(tile_map.get_cell(int(tile_position.x) + (direction * 2), int(tile_position.y))) :
+		tile_map.set_cell(int(tile_position.x) + direction , int(tile_position.y), tl)
+		tile_map.set_cell(int(tile_position.x) + direction , int(tile_position.y) -1, tl)
 		
-	if [17,18].has(tile_map.get_cell(tile_position.x + (direction * 2), tile_position.y)) and ![19,13].has(tile_map.get_cell(tile_position.x, tile_position.y))  :
-		tile_map.set_cell(tile_position.x + direction , tile_position.y, 19)
-		tile_map.set_cell(tile_position.x + direction , tile_position.y-1, 19)
+	if [17,18].has(tile_map.get_cell(int(tile_position.x) + (direction * 2), int(tile_position.y))) and ![19,13].has(tile_map.get_cell(int(tile_position.x), int(tile_position.y)))  :
+		tile_map.set_cell(int(tile_position.x) + direction , int(tile_position.y), 19)
+		tile_map.set_cell(int(tile_position.x) + direction , int(tile_position.y)-1, 19)
 	
 	_chage_to_dig_tile(tile_position, direction, world_position)
 	_chage_floor_tile(tile_position, direction, world_position)

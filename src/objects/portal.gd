@@ -14,7 +14,6 @@ onready var right = $AreaRight
 onready var level = get_tree().get_root().get_node("Game/Level")
 
 func _ready():
-	print()
 	var connected = connect("player_crossed", level, "_play_new_bg")
 
 func _on_Area2D_body_entered(body):

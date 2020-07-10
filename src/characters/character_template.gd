@@ -15,11 +15,12 @@ export (Resource) var controller_resource
 export (Resource) var minig_resource
 export (bool) var look_at_player = false
 export (bool) var has_bg_sound = false
-export (Resource) var inventory
+export (Resource) var inventories
 export (PackedScene) var inventory_ui
   
 var velocity = Vector2.ZERO
 var state = MOVE
+var inventory
 
 onready var animation_player = $AnimationPlayer 
 onready var animation_tree = $AnimationTree
@@ -70,7 +71,11 @@ func _ready():
 		
 		if has_bg_sound and is_instance_valid(bg_snd_player) :
 			setup_bgx(Bus.MASTER, "res://sounds/bg/woods-sound-bg.ogg")
-
+			
+		# setup inventory
+		if is_instance_valid(inventories) :
+			inventory = inventories.new(3, 10)
+			$debugInv.show()
 
 func _physics_process(delta):
 	
@@ -172,7 +177,6 @@ func setup_bgx(set_bus, snd):
 
 func do_action():
 	var action_area = $Sprite/ActionArea
-	var ignore_list = ['Sprite']
 	
 	for a in action_area.get_overlapping_areas() :
 		if a.name == "AreaEffect" :

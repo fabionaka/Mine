@@ -24,13 +24,11 @@ func _flickering():
 
 
 func _turn_on() -> void:
-	print("_turn_on ",light.enabled)
 	light.enabled = true
 	animation_player.play("Light")
 	
 	
 func _turn_off() -> void:
-	print("_turn_off ",light.enabled)
 	light.enabled = false
 	animation_player.play("Off")
 	

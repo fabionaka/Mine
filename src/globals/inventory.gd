@@ -3,8 +3,12 @@ signal inventory_full
 signal stack_full
 
 var item_list = []
-var max_slots = 3
-var max_stack = 2
+var max_slots = 5
+var max_stack = 10
+
+func _init(slots_number, stack_slot):
+	max_slots = slots_number
+	max_stack = stack_slot
 
 func _ready():
 	connect("inventory_full", self, "_i_full")
@@ -22,17 +26,15 @@ func add_item_to(item, value) :
 		stack.ammount += value
 	
 
-	_show_item_list_names()
-
-func remove_item_from(item, value) :
+func remove_item_from(_item, _value) :
 	pass
 
 
-func _search_item(item):
+func _search_item(_item):
 	pass
 
 
-func _get_stacked_item(item):
+func _get_stacked_item(_item):
 	pass
 
 func _is_inventory_full() -> bool:

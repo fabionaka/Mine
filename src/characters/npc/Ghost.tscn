@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/characters/ghost-01.png" type="Texture" id=3]
 [ext_resource path="res://characters/npc/Idle-ghost.tres" type="Animation" id=4]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Death"
 length = 2.3
 tracks/0/type = "value"
@@ -34,21 +34,34 @@ tracks/1/keys = {
 "method": "death"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.156863 ) ]
+}
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
 
 [node name="Ghost" instance=ExtResource( 1 )]
 character_resource = ExtResource( 2 )
 look_at_player = true
 
 [node name="Sprite" parent="." index="1"]
+self_modulate = Color( 1, 1, 1, 0.156863 )
 texture = ExtResource( 3 )
 hframes = 31
 frame = 9
 
 [node name="AnimationPlayer" parent="." index="2"]
-anims/Death = SubResource( 2 )
+anims/Death = SubResource( 1 )
 anims/Idle = ExtResource( 4 )
 
 [node name="AnimationTree" parent="." index="3"]
-parameters/playback = SubResource( 1 )
+parameters/playback = SubResource( 2 )

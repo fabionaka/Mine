@@ -1,19 +1,24 @@
 extends RigidBody2D
 
+signal item_picked
+
 export (String, "wood", "rock", "water") var config_material
 export (String, FILE) var default_sprite
 
 var game_material
+var resource_owner
 
 onready var game_materials = GameMaterials.new()
+onready var level = get_tree().get_root().get_node("Game/Level")
 
 func _ready():
 	
 	if config_material != null :
 		setup_object(config_material)
+		# Conecta sinal de corte de árvore
+		connect("item_picked", level, "add_item_to_inventory")
 	else :
 		queue_free()
-	
 
 
 func setup_object(name : String) :
@@ -36,7 +41,8 @@ func setup_object(name : String) :
 	resource_lifetime(game_material)
 
 
-func resource_lifetime(game_material):
+func resource_lifetime(game_material_local):
+	game_material = game_material_local
 	var lf_tm = 20
 	if game_material.has("lifetime") :
 		lf_tm = game_material.lifetime
@@ -56,3 +62,11 @@ func play_puff() -> void:
 
 func destroy() -> void:
 	queue_free()
+
+func set_resource_owner (body) :
+	resource_owner = body
+	emit_signal("item_picked",body, self)
+
+func _on_PickArea_body_entered(body):
+	if not resource_owner and body.get_groups().has("player"): 
+		set_resource_owner(body)

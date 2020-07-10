@@ -38,9 +38,11 @@ func move_control(delta, velocity : Vector2) -> Vector2:
 	
 	if input_vector != Vector2.ZERO :
 		animation_state.travel("Move")
+		velocity.y += 20
 		velocity = velocity.move_toward(input_vector * local_character.max_speed, local_character.max_acceleration * delta)
 	else :
 		animation_state.travel("Idle")
+		velocity.y += 20
 		velocity = velocity.move_toward(Vector2.ZERO, local_character.friction * delta)
 		
 	if Input.is_action_just_pressed("dig"):
@@ -52,7 +54,6 @@ func move_control(delta, velocity : Vector2) -> Vector2:
 
 func dig_control(_delta) -> Vector2:
 	var action_area = local_parent.get_node("Sprite/MinigArea")
-	var tree
 	for a in action_area.get_overlapping_areas() :
 		var element = a.get_parent()
 		if element.get_groups().has("trees") :

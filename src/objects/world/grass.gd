@@ -21,10 +21,13 @@ onready var bottomBone = $Skeleton2D/Bone2D
 onready var topBone = $Skeleton2D/Bone2D/Bone2D
 onready var tween = $Tween
 onready var init_pos = topBone.position
+onready var tree_timer = Timer.new()
 
 func _ready():
 	# Setup cycle
 	var rnd = RandomNumberGenerator.new()
+
+	add_child(tree_timer)
 	# inicia ciclo de vida da árvore
 	if !current_stage :
 		rnd.randomize()
@@ -34,7 +37,8 @@ func _ready():
 	
 	animate(topBone.position)
 
-func _process(delta):
+
+func _process(_delta):
 	if target :
 		follow()
 	else :
@@ -57,13 +61,10 @@ func do_life_cicle() -> void:
 	rnd.randomize()
 	var deflator = rnd.randf_range(0.7, 1.3)
 	var data = _search_stage(current_stage)
-			
-	var tree_timer = Timer.new()
-	add_child(tree_timer)
+	
 	tree_timer.start(deflator * data.time)
 	
 	yield(tree_timer,"timeout")
-	tree_timer.queue_free()
 	
 	if is_chopping : 
 		return 
@@ -95,9 +96,9 @@ func animate(last_pos) :
 
 
 func follow():
-	var target_direction = target.sprite.scale.x * 4 * -1
+	var target_direction = target.sprite.scale.x * 3 * -1
 	if !tween.is_active() and topBone.position.y != target_direction :
-		var new_pos = Vector2(3, target_direction)
+		var new_pos = Vector2(7, target_direction)
 		tween.interpolate_property(topBone, "position",
 				topBone.position, new_pos, 0.1,
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

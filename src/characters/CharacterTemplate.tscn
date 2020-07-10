@@ -263,3 +263,10 @@ cast_to = Vector2( 0, 10 )
 [node name="RayCast2D" type="RayCast2D" parent="FootRayCast"]
 position = Vector2( 0, 8 )
 cast_to = Vector2( 0, 15 )
+
+[node name="debugInv" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
