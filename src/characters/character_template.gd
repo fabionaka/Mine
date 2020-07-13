@@ -18,6 +18,7 @@ export (bool) var has_bg_sound = false
 export (Resource) var inventories
 export (PackedScene) var inventory_ui
   
+var debug_labels = []
 var velocity = Vector2.ZERO
 var state = MOVE
 var inventory
@@ -68,14 +69,12 @@ func _ready():
 			add_to_group(character.group_name)
 		
 		# Setup BG sound
-		
 		if has_bg_sound and is_instance_valid(bg_snd_player) :
 			setup_bgx(Bus.MASTER, "res://sounds/bg/woods-sound-bg.ogg")
 			
 		# setup inventory
 		if is_instance_valid(inventories) :
-			inventory = inventories.new(3, 10)
-			$debugInv.show()
+			inventory = inventories.new(5, 10, self)
 
 func _physics_process(delta):
 	
@@ -185,3 +184,19 @@ func do_action():
 			if a.get_parent().get_groups().has("actions"):
 				body_area.do_action()
 				return 
+
+
+func inventory_changed(item) :
+	var label = $debugInv/VBoxContainer/Label
+	var parent = $debugInv/VBoxContainer
+	
+	for l in debug_labels : 
+		l.queue_free()
+	debug_labels.clear()
+	
+	for i in inventory.item_list : 
+		var teste = label.duplicate()
+		teste.text = str(i.item.name ," - ",i.ammount)
+		teste.show()
+		parent.add_child(teste)
+		debug_labels.append(teste)

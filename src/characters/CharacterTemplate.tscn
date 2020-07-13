@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://characters/character_template.gd" type="Script" id=1]
 [ext_resource path="res://characters/character.gd" type="Script" id=2]
 [ext_resource path="res://globals/generic_controller.gd" type="Script" id=3]
 [ext_resource path="res://assets/characters/base-char.png" type="Texture" id=4]
+[ext_resource path="res://font/rainyhearts.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -213,6 +214,14 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=25]
 
+[sub_resource type="DynamicFont" id=26]
+size = 8
+outline_size = 1
+outline_color = Color( 0.196078, 0.129412, 0.12549, 1 )
+use_mipmaps = true
+extra_spacing_top = -5
+font_data = ExtResource( 5 )
+
 [node name="CharacterTemplate" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -265,8 +274,26 @@ position = Vector2( 0, 8 )
 cast_to = Vector2( 0, 15 )
 
 [node name="debugInv" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -19.0
+margin_top = 23.0
+margin_right = 21.0
+margin_bottom = 63.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="debugInv"]
+margin_right = 40.0
+margin_bottom = 44.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="debugInv/VBoxContainer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 2.0
+custom_fonts/font = SubResource( 26 )
+text = "teste"
+align = 1
+autowrap = true

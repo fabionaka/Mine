@@ -1,29 +1,35 @@
+extends Node2D
 class_name Inventory 
 signal inventory_full
 signal stack_full
+signal item_added_to_inventory
 
 var item_list = []
 var max_slots = 5
 var max_stack = 10
+var inventary_owner
 
-func _init(slots_number, stack_slot):
+func _init(slots_number, stack_slot, inv_owner):
 	max_slots = slots_number
 	max_stack = stack_slot
+	inventary_owner = inv_owner
+	
+	connect("item_added_to_inventory",  inv_owner, "inventory_changed")
 
-func _ready():
-	connect("inventory_full", self, "_i_full")
-	connect("stack_full", self,"_s_full")
 
-func add_item_to(item, value) :
+func add_item_to(item, value) : 
 	var template = {"item": null, "ammount": 0}
 	var stack = _is_stacked(item)
 	if not stack and not _is_inventory_full() :
 		template.item = item
-		template.ammount = value
+		template.ammount = value 
 		item_list.append(template)
+		emit_signal("item_added_to_inventory", item)
 		
 	if stack and not _is_stack_full(stack, value) :
 		stack.ammount += value
+		emit_signal("item_added_to_inventory", item)
+	
 	
 
 func remove_item_from(_item, _value) :

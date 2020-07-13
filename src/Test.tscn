@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/tilemap/ground_tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -18,13 +18,11 @@
 [ext_resource path="res://assets/background/bg-2.png" type="Texture" id=16]
 [ext_resource path="res://assets/background/bg-4.png" type="Texture" id=17]
 [ext_resource path="res://characters/npc/Dog.tscn" type="PackedScene" id=18]
-[ext_resource path="res://objects/world/TreeSpawner.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Level.gd" type="Script" id=20]
 [ext_resource path="res://assets/objects/set.png" type="Texture" id=21]
 [ext_resource path="res://objects/Portal.tscn" type="PackedScene" id=22]
 [ext_resource path="res://characters/npc/ghost_controller.gd" type="Script" id=23]
 [ext_resource path="res://globals/tile_manager.gd" type="Script" id=24]
-[ext_resource path="res://objects/world/grass.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/tilemap/ponte.png" type="Texture" id=26]
 [ext_resource path="res://globals/inventory.gd" type="Script" id=27]
 
@@ -405,8 +403,9 @@ tile_data = PoolIntArray( -131080, 4, 0, -65544, 4, 0, -8, 4, 0, 65528, 4, 0, 13
 [node name="Layer1" type="Node2D" parent="Level"]
 
 [node name="set" type="Sprite" parent="Level/Layer1"]
-position = Vector2( 228, 24 )
+position = Vector2( 696, 48 )
 texture = ExtResource( 21 )
+offset = Vector2( 0, -24 )
 
 [node name="Placa" parent="Level/Layer1" instance=ExtResource( 7 )]
 position = Vector2( 288, 40 )
@@ -429,48 +428,6 @@ possui_acao = true
 [node name="Firepit" parent="Level/Layer1" instance=ExtResource( 8 )]
 position = Vector2( 142, 38 )
 
-[node name="TreeSpawner" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 536, 48 )
-
-[node name="TreeSpawner3" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 552, 48 )
-
-[node name="TreeSpawner4" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 568, 48 )
-
-[node name="TreeSpawner5" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 504, 48 )
-
-[node name="TreeSpawner6" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 584, 48 )
-
-[node name="TreeSpawner7" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 600, 48 )
-
-[node name="TreeSpawner8" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 616, 48 )
-
-[node name="TreeSpawner9" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 632, 48 )
-
-[node name="TreeSpawner10" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 648, 48 )
-
-[node name="TreeSpawner11" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 680, 48 )
-
-[node name="TreeSpawner12" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 488, 48 )
-
-[node name="TreeSpawner13" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 472, 48 )
-
-[node name="TreeSpawner14" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 440, 48 )
-
-[node name="TreeSpawner2" parent="Level/Layer1" instance=ExtResource( 19 )]
-position = Vector2( 520, 48 )
-
 [node name="Actors" type="Node2D" parent="Level"]
 
 [node name="Dog" parent="Level/Actors" instance=ExtResource( 18 )]
@@ -485,7 +442,7 @@ collision_mask = 1
 controller_resource = ExtResource( 23 )
 
 [node name="Player" parent="Level/Actors" instance=ExtResource( 2 )]
-position = Vector2( 709, 38 )
+position = Vector2( 712, 16 )
 character_resource = ExtResource( 5 )
 controller_resource = ExtResource( 4 )
 minig_resource = ExtResource( 24 )
@@ -497,48 +454,6 @@ inventories = ExtResource( 27 )
 [node name="Portal" parent="Level/Layer2" instance=ExtResource( 22 )]
 light_mask = 3
 position = Vector2( 168.101, 32.0421 )
-
-[node name="Grass" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 664, 48 )
-
-[node name="Grass2" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 648, 48 )
-
-[node name="Grass3" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 632, 48 )
-
-[node name="Grass4" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 616, 48 )
-
-[node name="Grass5" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 600, 48 )
-
-[node name="Grass6" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 584, 48 )
-
-[node name="Grass7" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 568, 48 )
-
-[node name="Grass8" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 552, 48 )
-
-[node name="Grass9" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 536, 48 )
-
-[node name="Grass10" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 520, 48 )
-
-[node name="Grass11" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 504, 48 )
-
-[node name="Grass12" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 488, 48 )
-
-[node name="Grass13" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 472, 48 )
-
-[node name="Grass14" parent="Level/Layer2" instance=ExtResource( 25 )]
-position = Vector2( 456, 48 )
 
 [node name="TileMap2" type="TileMap" parent="Level"]
 visible = false
